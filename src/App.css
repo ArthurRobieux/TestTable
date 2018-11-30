@@ -1,8 +1,67 @@
 .react_table{
-  width: 50%;
-  margin: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 25px;
+  width: 75%;
 }
 
 :focus{
   outline:0;
 }
+
+.rt-td{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.avatar{
+  border-radius: 30px;
+  width: 30px;
+}
+
+#popup{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 0;
+  height: 0;
+  background: #ececec;
+  border: 5px solid black;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition-duration: 0.3s;
+}
+
+.popup_avatar{
+  border-radius: 30px;
+  width: 100px;
+  margin: 10px;
+  border: 2px solid black;
+}
+
+.popup_avatar_div{
+  display: inline-block;
+  width: 30%;
+}
+
+.popup_infos_div{
+  display:inline-block;
+  width: 70%;
+  position: absolute;
+  top: 0px;
+}
+
+.close_popup{
+  border-radius: 50px;
+  width: 30px;
+  margin: 10px;
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  z-index: 1;
+}
+
