@@ -23,9 +23,8 @@ class App extends Component {
       let new_member = {
         firstName: data.results[i].profile.first_name,
         lastName: data.results[i].profile.last_name,
-        age: "-",
-        taille: "-",
-        poids: "-",
+        email: data.results[i].profile.email,
+        id: data.results[i].profile.id,
       };
       members_data.push(new_member);
     }
@@ -56,16 +55,12 @@ class App extends Component {
             Header: "Infos",
             columns: [
                 {
-                    Header: 'Age',
-                    accessor: 'age',
+                    Header: 'Email',
+                    accessor: 'email',
                 },
                 {
-                    Header: 'Taille',
-                    accessor: 'taille',
-                },
-                {
-                    Header: 'Poids',
-                    accessor: 'poids',
+                    Header: 'Id',
+                    accessor: 'id',
                 },
             ]
         },

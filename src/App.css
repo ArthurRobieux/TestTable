@@ -3,6 +3,6 @@
   padding: 10px;
 }
 
-.react_table:focus{
+:focus{
   outline:0;
 }
