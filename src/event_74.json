@@ -1,0 +1,1605 @@
+{
+    "count": 26,
+    "_links": {
+        "invite": {
+            "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/",
+            "method": "POST"
+        }
+    },
+    "results": [
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 125,
+                "first_name": "BB",
+                "last_name": "King",
+                "full_name": "Bb King",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/bb-king.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/bb-king.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/bb-king.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/bb-king.jpg"
+                },
+                "email": "bb.king@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": {
+                "slug_name": "football_attacking_midfielder",
+                "localized_name": "Milieu offensif",
+                "localized_name_short": "MOF"
+            },
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/125/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/125/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/125/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/125/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/125/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 129,
+                "first_name": "Bo",
+                "last_name": "Diddley",
+                "full_name": "Bo Diddley",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/bo-diddley.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/bo-diddley.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/bo-diddley.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/bo-diddley.jpg"
+                },
+                "email": "bo.diddley@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_casual_player",
+                "localized_name": "Joueur occasionnel"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/129/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/129/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/129/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/129/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/129/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 131,
+                "first_name": "Brian",
+                "last_name": "May",
+                "full_name": "Brian May",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/brian-may.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/brian-may.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/brian-may.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/brian-may.jpg"
+                },
+                "email": "brian.may@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_casual_player",
+                "localized_name": "Joueur occasionnel"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/131/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/131/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/131/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/131/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/131/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": true,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 17,
+                "first_name": "Carlos",
+                "last_name": "Santana",
+                "full_name": "Carlos Santana",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/carlos-santana.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/carlos-santana.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/carlos-santana.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/carlos-santana.jpg"
+                },
+                "email": "carlos.santana@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": "Smooth",
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_coach",
+                "localized_name": "Coach"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/17/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/17/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/17/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/17/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": true,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 138,
+                "first_name": "Chuck",
+                "last_name": "Berry",
+                "full_name": "Chuck Berry",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/chuck-berry.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/chuck-berry.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/chuck-berry.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/chuck-berry.jpg"
+                },
+                "email": "chuck.berry@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player_coach",
+                "localized_name": "Joueur-coach"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/138/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/138/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/138/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/138/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/138/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 147,
+                "first_name": "Dick",
+                "last_name": "Dale",
+                "full_name": "Dick Dale",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/dick-dale.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/dick-dale.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/dick-dale.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/dick-dale.jpg"
+                },
+                "email": "dick.dale@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_casual_player",
+                "localized_name": "Joueur occasionnel"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/147/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/147/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/147/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/147/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/147/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 151,
+                "first_name": "Duan",
+                "last_name": "Allman",
+                "full_name": "Duan Allman",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/duan-allman.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/duan-allman.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/duan-allman.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/duan-allman.jpg"
+                },
+                "email": "duan.allman@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/151/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/151/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/151/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/151/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/151/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 154,
+                "first_name": "Eric",
+                "last_name": "Clapton",
+                "full_name": "Eric Clapton",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/eric-clapton.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/eric-clapton.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/eric-clapton.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/eric-clapton.jpg"
+                },
+                "email": "eric.clapton@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": "1945-03-30",
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": {
+                "slug_name": "football_attacking_midfielder",
+                "localized_name": "Milieu offensif",
+                "localized_name_short": "MOF"
+            },
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/154/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/154/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/154/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/154/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/154/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 161,
+                "first_name": "Gérard",
+                "last_name": "Hérisson",
+                "full_name": "Gérard Hérisson",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/gerard-herisson.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/gerard-herisson.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/gerard-herisson.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/gerard-herisson.jpg"
+                },
+                "email": "gerard.herisson@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_friend",
+                "localized_name": "Ami"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/161/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/161/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/161/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/161/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/161/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 171,
+                "first_name": "Jack",
+                "last_name": "White",
+                "full_name": "Jack White",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/jack-white.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/jack-white.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/jack-white.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/jack-white.jpg"
+                },
+                "email": "jack.white@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/171/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/171/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/171/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/171/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/171/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 173,
+                "first_name": "James",
+                "last_name": "Burton",
+                "full_name": "James Burton",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/james-burton.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/james-burton.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/james-burton.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/james-burton.jpg"
+                },
+                "email": "james.burton@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/173/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/173/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/173/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/173/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/173/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 197,
+                "first_name": "Jerry",
+                "last_name": "Garcia",
+                "full_name": "Jerry Garcia",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/jerry-garcia.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/jerry-garcia.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/jerry-garcia.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/jerry-garcia.jpg"
+                },
+                "email": "jerry.garcia@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/197/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/197/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/197/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/197/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/197/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": true,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 198,
+                "first_name": "Jimi",
+                "last_name": "Hendrix",
+                "full_name": "Jimi Hendrix",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/jimi-hendrix.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/jimi-hendrix.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/jimi-hendrix.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/jimi-hendrix.jpg"
+                },
+                "email": "jimi.hendrix@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": "1927-11-27",
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player_coach",
+                "localized_name": "Joueur-coach"
+            },
+            "usual_tactic_position": {
+                "slug_name": "football_centreback",
+                "localized_name": "Défenseur central",
+                "localized_name_short": "DEC"
+            },
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/198/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/198/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/198/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/198/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/198/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 200,
+                "first_name": "Jimmy",
+                "last_name": "Page",
+                "full_name": "Jimmy Page",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/jimmy-page.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/jimmy-page.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/jimmy-page.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/jimmy-page.jpg"
+                },
+                "email": "jimmy.page@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/200/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/200/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/200/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/200/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/200/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 204,
+                "first_name": "John",
+                "last_name": "Frusciante",
+                "full_name": "John Frusciante",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/john-frusciante.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/john-frusciante.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/john-frusciante.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/john-frusciante.jpg"
+                },
+                "email": "john.frusciante@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/204/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/204/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/204/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/204/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/204/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 207,
+                "first_name": "Johnny",
+                "last_name": "Ramone",
+                "full_name": "Johnny Ramone",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/johnny-ramone.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/johnny-ramone.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/johnny-ramone.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/johnny-ramone.jpg"
+                },
+                "email": "johnny.ramone@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": "1947-07-20",
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/207/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/207/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/207/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/207/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/207/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 211,
+                "first_name": "Keith",
+                "last_name": "Richards",
+                "full_name": "Keith Richards",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/keith-richards.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/keith-richards.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/keith-richards.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/keith-richards.jpg"
+                },
+                "email": "keith.richards@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/211/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/211/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/211/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/211/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/211/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 215,
+                "first_name": "Kirk",
+                "last_name": "Hammett",
+                "full_name": "Kirk Hammett",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/kirk-hammett.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/kirk-hammett.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/kirk-hammett.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/kirk-hammett.jpg"
+                },
+                "email": "kirk.hammett@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/215/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/215/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/215/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/215/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/215/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 216,
+                "first_name": "Kurt",
+                "last_name": "Cobain",
+                "full_name": "Kurt Cobain",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/kurt-cobain.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/kurt-cobain.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/kurt-cobain.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/kurt-cobain.jpg"
+                },
+                "email": "kurt.cobain@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": "1967-02-20",
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/216/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/216/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/216/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/216/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/216/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 230,
+                "first_name": "Mark",
+                "last_name": "Knopfler",
+                "full_name": "Mark Knopfler",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/mark-knopfler.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/mark-knopfler.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/mark-knopfler.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/mark-knopfler.jpg"
+                },
+                "email": "mark.knopfler@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_casual_player",
+                "localized_name": "Joueur occasionnel"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/230/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/230/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/230/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/230/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/230/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 256,
+                "first_name": "Richard",
+                "last_name": "Thompson",
+                "full_name": "Richard Thompson",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/richard-thompson.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/richard-thompson.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/richard-thompson.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/richard-thompson.jpg"
+                },
+                "email": "richard.thompson@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/256/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/256/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/256/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/256/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/256/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": true,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 258,
+                "first_name": "Ritchie",
+                "last_name": "Blackmore",
+                "full_name": "Ritchie Blackmore",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/static/themes/v1/images/common/default/avatar/small.58a913517fb8.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/static/themes/v1/images/common/default/avatar/field.2c9c8ffcca80.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/static/themes/v1/images/common/default/avatar/medium.b639776dcddd.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/static/themes/v1/images/common/default/avatar/120x120.f24bc7a596f9.jpg"
+                },
+                "email": "ritchie.blackmore@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_coach",
+                "localized_name": "Coach"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/258/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/258/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/258/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/258/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/258/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 261,
+                "first_name": "Robert",
+                "last_name": "Johnson",
+                "full_name": "Robert Johnson",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/robert-johnson.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/robert-johnson.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/robert-johnson.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/robert-johnson.jpg"
+                },
+                "email": "robert.johnson@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/261/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/261/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/261/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/261/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/261/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 263,
+                "first_name": "Ry",
+                "last_name": "Cooder",
+                "full_name": "Ry Cooder",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/ry-cooder.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/ry-cooder.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/ry-cooder.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/ry-cooder.jpg"
+                },
+                "email": "ry.cooder@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/263/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/263/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/263/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/263/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/263/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 271,
+                "first_name": "Stevie Ray",
+                "last_name": "Vaughan",
+                "full_name": "Stevie Ray Vaughan",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/stevie-ray-vaughan.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/stevie-ray-vaughan.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/stevie-ray-vaughan.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/stevie-ray-vaughan.jpg"
+                },
+                "email": "stevie.ray.vaughan@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/271/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/271/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/271/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/271/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/271/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        },
+        {
+            "is_admin": false,
+            "licence_number": null,
+            "year_of_arrival": null,
+            "profile": {
+                "id": 133,
+                "first_name": "창풍",
+                "last_name": "완난워",
+                "full_name": "창풍 완난워",
+                "avatar": {
+                    "small": "http://cdn.local.sporteasy.net:8000/media/image/avatar/small/fixtures/changpung-wannanwo.jpg",
+                    "field": "http://cdn.local.sporteasy.net:8000/media/image/avatar/field/fixtures/changpung-wannanwo.jpg",
+                    "medium": "http://cdn.local.sporteasy.net:8000/media/image/avatar/medium/fixtures/changpung-wannanwo.jpg",
+                    "120x120": "http://cdn.local.sporteasy.net:8000/media/image/avatar/120x120/fixtures/changpung-wannanwo.jpg"
+                },
+                "email": "changpung.wannanwo@sporteasy.fr",
+                "phone_number": null,
+                "activated_at": "2018-10-19T14:56:04+02:00",
+                "date_of_birth": null,
+                "weight": null,
+                "height": null,
+                "default_language": "fr",
+                "is_active": true,
+                "nickname": null,
+                "invited_at": null
+            },
+            "role": {
+                "slug_name": "role_player",
+                "localized_name": "Joueur"
+            },
+            "usual_tactic_position": null,
+            "jersey_number": null,
+            "status": {
+                "slug_name": "activated",
+                "localized_name": null,
+                "localized_help": null,
+                "_links": {}
+            },
+            "_links": {
+                "delete_team_member": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/133/",
+                    "method": "DELETE"
+                },
+                "update_profile": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/133/",
+                    "method": "PUT"
+                },
+                "upload_avatar": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/133/",
+                    "method": "PUT"
+                },
+                "create_unavailability": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/133/unavailabilities/",
+                    "method": "POST"
+                },
+                "list_unavailabilities": {
+                    "url": "http://api.local.sporteasy.net:8000/v2.1/teams/6/profiles/133/unavailabilities/",
+                    "method": "GET"
+                }
+            }
+        }
+    ]
+}
