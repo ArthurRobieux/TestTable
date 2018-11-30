@@ -43,11 +43,13 @@ class App extends Component {
             columns: [
                 {
                     Header: "First Name",
-                    accessor: "firstName"
+                    accessor: "firstName",
+                    width: 150,
                 },
                 {
                     Header: "Last Name",
                     accessor: "lastName",
+                    width: 150,
                 }
             ]
         },
@@ -57,6 +59,7 @@ class App extends Component {
                 {
                     Header: 'Email',
                     accessor: 'email',
+                    width: 300,
                 },
                 {
                     Header: 'Id',
@@ -68,10 +71,12 @@ class App extends Component {
 
     return(
         <div>
-            <div className={"react_table"}>
-                <ReactTable data={this.state.members_data} columns={columns} defaultPageSize={10}/>
-            </div>
+
+          <ReactTable data={this.state.members_data} columns={columns} defaultPageSize={10}  style={{height: "400px" }}
+          className="-striped -highlight react_table" filterable/>
+
             My beautiful React Table
+
         </div>
     );
 
