@@ -53,6 +53,24 @@ class ClubMembersList extends Component {
                     width: 200,
                 },
                 {
+                    Header: 'Teams',
+                    accessor: 'teams',
+                    width: 150,
+                    aggregate: vals => 'hey',
+                    Aggregated: row => {
+                        return (
+                            <span>
+                                Hey
+                            </span>
+                        );
+                    }
+                },
+                {
+                    Header: 'Licence n°',
+                    accessor: 'licence_number',
+                    width: 150,
+                },
+                {
                     Header: 'Telephone',
                     accessor: 'phone_number',
                     width: 150,
@@ -96,6 +114,8 @@ class ClubMembersList extends Component {
   // For each member in the API response, we will create a member and add him to state.members_data
   createDataFromJson(api_response){
 
+    console.log(api_response);
+
     let members_data = [];
 
     for(var i=0; i<api_response.results.length; i++){
@@ -109,6 +129,7 @@ class ClubMembersList extends Component {
         weight: api_response.results[i].profile.height,
         licence_number: api_response.results[i].profile.licence_number,
         phone_number: api_response.results[i].profile.phone_number,
+        teams: api_response.results[i].teams,
       };
       members_data.push(new_member);
     }
@@ -168,7 +189,7 @@ class ClubMembersList extends Component {
       try{
           return(
               <ReactTable data={this.state.members_data} noDataText="Loading .." columns={this.state.columns} defaultPageSize={10}
-                className="-striped -highlight react_table" filterable/>
+                className="-striped -highlight react_table" filterable />
           )
       }
       catch(error){
