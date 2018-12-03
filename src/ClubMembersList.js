@@ -7,7 +7,7 @@ import 'react-table/react-table.css'
 import withFixedColumns from "react-table-hoc-fixed-columns";
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
-class App extends Component {
+class ClubMembersList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +24,7 @@ class App extends Component {
                     filterable: false,
                     Cell: profile => (<img src={profile.value.avatar["120x120"]} alt={profile.value.avatar["120x120"]}
                                            className={"avatar"}
-                                           onClick={() => this.showPopUp(profile.value)}/>)
+                                           onClick={() => this.showPopUp(profile.value)}/>),
                 },
                 {
                     Header: 'Id',
@@ -35,12 +35,12 @@ class App extends Component {
                 {
                     Header: "First Name",
                     accessor: "first_name",
-                    width: 150,
+                    width: 100,
                 },
                 {
                     Header: "Last Name",
                     accessor: "last_name",
-                    width: 150,
+                    width: 100,
                 },
             ]
         },
@@ -50,27 +50,24 @@ class App extends Component {
                 {
                     Header: 'Email',
                     accessor: 'email',
-                    width: 250,
+                    width: 200,
                 },
                 {
                     Header: 'Telephone',
                     accessor: 'phone_number',
-                    width: 200,
+                    width: 150,
                     filterable: false,
-                },
-                {
-                    Header: 'Rôle',
-                    accessor: 'role',
-                    width: 200,
                 },
                 {
                     Header: 'Taille',
                     accessor: 'height',
+                    width: 100,
                     filterable: false,
                 },
                 {
                     Header: 'Poids',
                     accessor: 'weight',
+                    width: 100,
                     filterable: false,
                 },
             ]
@@ -80,9 +77,9 @@ class App extends Component {
   }
 
   // Get members data from API and save them in state
-  getApiMemberList(){
+  getApiClubMemberList(){
 
-    const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/teams/' + this.props.team_id + '/profiles/';
+    const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id + '/profiles/';
 
     fetch(API_URL, {
         method: "GET",
@@ -108,7 +105,6 @@ class App extends Component {
         last_name: api_response.results[i].profile.last_name,
         email: api_response.results[i].profile.email,
         id: api_response.results[i].profile.id,
-        role: api_response.results[i].role.localized_name,
         height: api_response.results[i].profile.weight,
         weight: api_response.results[i].profile.height,
         licence_number: api_response.results[i].profile.licence_number,
@@ -171,7 +167,7 @@ class App extends Component {
   showTable(){
       try{
           return(
-              <ReactTableFixedColumns data={this.state.members_data} columns={this.state.columns} defaultPageSize={10}
+              <ReactTable data={this.state.members_data} noDataText="Loading .." columns={this.state.columns} defaultPageSize={10}
                 className="-striped -highlight react_table" filterable/>
           )
       }
@@ -182,7 +178,7 @@ class App extends Component {
 
   // Get members data from the API and convert them in state.members_data
   componentDidMount(){
-    this.getApiMemberList();
+    this.getApiClubMemberList();
 
   }
 
@@ -202,4 +198,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default ClubMembersList;
