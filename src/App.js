@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import data from './event_74.json';
-
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
@@ -77,30 +75,47 @@ class App extends Component {
     };
   }
 
-  // Pour chaque result on va créer un objet membre et l'ajouter dans la liste qu'on affiche dans le tableau
-  createDataFromJson(){
+  // Get members data from API and save them in state
+  getApiMemberList(){
+
+    const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/teams/' + this.props.team_id + '/profiles/';
+
+    fetch(API_URL, {
+        method: "GET",
+        credentials: 'include',
+    })
+    .then(response =>
+        response.json()
+    )
+    .then(json_response =>
+        this.createDataFromJson(json_response),
+    )
+  }
+
+  // For each member in the API response, we will create a member and add him to state.members_data
+  createDataFromJson(api_response){
 
     let members_data = [];
 
-    for(var i=0; i<data.results.length; i++){
+    for(var i=0; i<api_response.results.length; i++){
       let new_member = {
-        avatar: data.results[i].profile,
-        first_name: data.results[i].profile.first_name,
-        last_name: data.results[i].profile.last_name,
-        email: data.results[i].profile.email,
-        id: data.results[i].profile.id,
-        role: data.results[i].role.localized_name,
-        height: data.results[i].profile.weight,
-        weight: data.results[i].profile.height,
-        licence_number: data.results[i].profile.licence_number,
-        phone_number: data.results[i].profile.phone_number,
+        avatar: api_response.results[i].profile,
+        first_name: api_response.results[i].profile.first_name,
+        last_name: api_response.results[i].profile.last_name,
+        email: api_response.results[i].profile.email,
+        id: api_response.results[i].profile.id,
+        role: api_response.results[i].role.localized_name,
+        height: api_response.results[i].profile.weight,
+        weight: api_response.results[i].profile.height,
+        licence_number: api_response.results[i].profile.licence_number,
+        phone_number: api_response.results[i].profile.phone_number,
       };
       members_data.push(new_member);
     }
     this.setState({members_data: members_data})
   }
 
-  // Au clic on afficher ou cache le pop-up, en lui envoyant les bonnes données
+  // Onclick, show or hide pop-up, by giving him data
   showPopUp(popup_content){
 
     let d = document.getElementById("popup");
@@ -119,9 +134,10 @@ class App extends Component {
         d.style.height = "30%";
         this.setState({popup_content: popup_content});
     }
+    console.log(this.state);
   }
 
-  // Contenu du PopUp
+  // Pop-up content
   popUp(){
     try{
       return(
@@ -147,19 +163,31 @@ class App extends Component {
     }
   }
 
+  // Show Table if there is data in the state.members_data
+  showTable(){
+      try{
+          return(
+              <ReactTable data={this.state.members_data} columns={this.state.columns} defaultPageSize={10}
+                className="-striped -highlight react_table" filterable/>
+          )
+      }
+      catch(error){
+          return("No data in state.members_data.");
+      }
+  }
+
+  // Get members data from the API and convert them in state.members_data
   componentDidMount(){
-    this.createDataFromJson();
+    this.getApiMemberList();
+
   }
 
   render() {
 
-
     return(
         <div>
 
-          <ReactTable data={this.state.members_data} columns={this.state.columns} defaultPageSize={10} style={{height: "500px" }}
-          className="-striped -highlight react_table" filterable/>
-
+          {this.showTable()}
           {this.popUp()}
 
         </div>
