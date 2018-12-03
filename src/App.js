@@ -4,6 +4,9 @@ import './App.css';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
+import withFixedColumns from "react-table-hoc-fixed-columns";
+const ReactTableFixedColumns = withFixedColumns(ReactTable);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +15,7 @@ class App extends Component {
       columns: [
         {
             Header: "Profile",
+            fixed: "left",
             columns: [
                 {
                     Header: '',
@@ -167,7 +171,7 @@ class App extends Component {
   showTable(){
       try{
           return(
-              <ReactTable data={this.state.members_data} columns={this.state.columns} defaultPageSize={10}
+              <ReactTableFixedColumns data={this.state.members_data} columns={this.state.columns} defaultPageSize={10}
                 className="-striped -highlight react_table" filterable/>
           )
       }
