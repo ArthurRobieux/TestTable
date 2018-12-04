@@ -4,6 +4,8 @@ import './App.css';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
+import PopUp from "./PopUp"
+
 import withFixedColumns from "react-table-hoc-fixed-columns";
 
 import Chance from "chance";
@@ -168,31 +170,6 @@ class ClubMembersList extends Component {
     console.log(this.state);
   }
 
-  // Pop-up content
-  popUp(){
-    try{
-      return(
-          <div id={"popup"}>
-            <img src={"/close.png"} className={"close_popup"}
-                 onClick={() => this.showPopUp()}/>
-
-            <div className={"popup_avatar_div"}>
-              <img src={this.state.popup_content.avatar["120x120"]} className={"popup_avatar"}/>
-            </div>
-
-            <div className={"popup_infos_div"}>
-                <h3>{this.state.popup_content.first_name} {this.state.popup_content.last_name}</h3>
-                <h4>Id : {this.state.popup_content.id}</h4>
-                <h4>Email : {this.state.popup_content.email}</h4>
-                <h4>Téléphone : {this.state.popup_content.phone_number}</h4>
-            </div>
-          </div>
-      )}
-    catch (error) {
-        return(<div id={"popup"}></div>)
-    }
-  }
-
   // Add/delete lines to state.selection
   toggleSelection = (key) => {
     // start off with the existing state
@@ -245,6 +222,23 @@ class ClubMembersList extends Component {
     }
   };
 
+  // Show selected lines
+  showSelection = () => {
+    let selected_members = [];
+    for(var i=0; i<this.state.members_data.length; i++){
+        if(this.isSelected(this.state.members_data[i]._id)){
+            selected_members.push(this.state.members_data[i]);
+        }
+    }
+    return(
+        <div>
+            {selected_members.map(member => (
+                member.first_name + " (" + member.id + ") "
+            ))}
+        </div>
+    )
+  };
+
   // Show Table if there is data in the state.members_data
   showTable(){
       try{
@@ -280,11 +274,12 @@ class ClubMembersList extends Component {
     return(
         <div>
 
-          <button onClick={this.logSelection}>Log Selection</button>
           {this.showTable()}
-          {this.popUp()}
+          <PopUp popup_content={this.state.popup_content}/>
 
-          {this.state.selection}
+          {/*See selection with checkbox  */}
+          <button onClick={this.logSelection}>Log Selection</button>
+          {this.showSelection()}
 
         </div>
     );
