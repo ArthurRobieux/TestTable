@@ -9,8 +9,6 @@ import PopUp from "./PopUp";
 import withFixedColumns from "react-table-hoc-fixed-columns";
 import Chance from "chance";
 import checkboxHOC from "react-table/lib/hoc/selectTable";
-import matchSorter from "match-sorter";
-
 
 const CheckboxTable = checkboxHOC(ReactTable);
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
@@ -59,15 +57,11 @@ class TeamMembersList extends Component {
                     Header: "First Name",
                     accessor: "first_name",
                     width: 100,
-                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["first_name"] }),
-                    filterAll: true
                 },
                 {
                     Header: "Last Name",
                     accessor: "last_name",
                     width: 100,
-                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["last_name"] }),
-                    filterAll: true
                 },
             ]
         },
@@ -78,8 +72,6 @@ class TeamMembersList extends Component {
                     Header: 'Email',
                     accessor: 'email',
                     width: 200,
-                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["email"] }),
-                    filterAll: true
                 },
                 {
                     Header: 'Telephone',
@@ -106,7 +98,6 @@ class TeamMembersList extends Component {
                   Filter: ({ filter, onChange }) =>
                     <select
                       onChange={event => onChange(event.target.value)}
-                      style={{ width: "100%" }}
                       value={filter ? filter.value : "all"}
                     >
                       <option value="all">All</option>
@@ -280,7 +271,10 @@ class TeamMembersList extends Component {
           return(
               <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
                              columns={this.state.columns} defaultPageSize={10}
-                             className="-striped -highlight react_table" filterable {...checkboxProps}/>
+                             className="-striped -highlight react_table" filterable {...checkboxProps}
+                             defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
+                             ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
+              />
           )
       }
       catch(error){
