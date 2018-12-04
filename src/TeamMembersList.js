@@ -33,95 +33,8 @@ class TeamMembersList extends Component {
       members_data: [],
       selection: [],
       selectAll: false,
-      columns: [
-        {
-            Header: "Profile",
-            fixed: "left",
-            columns: [
-                {
-                    Header: '',
-                    accessor: 'avatar',
-                    width: 40,
-                    filterable: false,
-                    Cell: profile => (<img src={profile.value.avatar["120x120"]} alt={profile.value.avatar["120x120"]}
-                                           className={"avatar"}
-                                           onClick={() => this.showPopUp(profile.value)}/>),
-                },
-                {
-                    Header: 'Id',
-                    accessor: 'id',
-                    width: 50,
-                    filterable: false,
-                },
-                {
-                    Header: "First Name",
-                    accessor: "first_name",
-                    width: 100,
-                },
-                {
-                    Header: "Last Name",
-                    accessor: "last_name",
-                    width: 100,
-                },
-            ]
-        },
-        {
-            Header: "Infos",
-            columns: [
-                {
-                    Header: 'Email',
-                    accessor: 'email',
-                    width: 200,
-                },
-                {
-                    Header: 'Telephone',
-                    accessor: 'phone_number',
-                    width: 150,
-                    filterable: false,
-                },
-                {
-                    Header: 'Rôle',
-                    accessor: 'role',
-                    width: 200,
-                    filterMethod: (filter, row) => {
-                    if (filter.value === "all") {
-                      return true;
-                    }
-                    if (filter.value === "coach") {
-                      return row[filter.id].includes("Coach") || row[filter.id].includes("coach");
-                    }
-                    if (filter.value === "joueur") {
-                      return row[filter.id].includes("Joueur");
-                    }
-                    return row[filter.id] === "Ami";
-                  },
-                  Filter: ({ filter, onChange }) =>
-                    <select
-                      onChange={event => onChange(event.target.value)}
-                      value={filter ? filter.value : "all"}
-                    >
-                      <option value="all">All</option>
-                      <option value="coach">Coach</option>
-                      <option value="joueur">Joueur</option>
-                      <option value="ami">Ami</option>
-                    </select>
-                },
-                {
-                    Header: 'Taille',
-                    accessor: 'height',
-                    width: 100,
-                    filterable: false,
-                },
-                {
-                    Header: 'Poids',
-                    accessor: 'weight',
-                    width: 100,
-                    filterable: false,
-                },
-            ]
-        },
-      ],
     };
+    this.renderEditable = this.renderEditable.bind(this);
   }
 
   // Get members data from API and save them in state
@@ -268,12 +181,100 @@ class TeamMembersList extends Component {
             toggleAll,
             selectType: "checkbox",
           };
+
           return(
               <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
-                             columns={this.state.columns} defaultPageSize={10}
+                             defaultPageSize={10}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
+                             columns={[
+                                {
+                                    Header: "Profile",
+                                    fixed: "left",
+                                    columns: [
+                                        {
+                                            Header: '',
+                                            accessor: 'avatar',
+                                            width: 40,
+                                            filterable: false,
+                                            Cell: profile => (<img src={profile.value.avatar["120x120"]}
+                                                                   alt={profile.value.avatar["120x120"]}
+                                                                   className={"avatar"}
+                                                                   onClick={() => this.showPopUp(profile.value)}/>),
+                                        },
+                                        {
+                                            Header: 'Id',
+                                            accessor: 'id',
+                                            width: 50,
+                                            filterable: false,
+                                        },
+                                        {
+                                            Header: "First Name",
+                                            accessor: "first_name",
+                                            width: 100,
+                                            Cell: this.renderEditable,
+                                        },
+                                        {
+                                            Header: "Last Name",
+                                            accessor: "last_name",
+                                            width: 100,
+                                        },
+                                    ]
+                                },
+                                {
+                                    Header: "Infos",
+                                    columns: [
+                                        {
+                                            Header: 'Email',
+                                            accessor: 'email',
+                                            width: 200,
+                                        },
+                                        {
+                                            Header: 'Telephone',
+                                            accessor: 'phone_number',
+                                            width: 150,
+                                            filterable: false,
+                                        },
+                                        {
+                                            Header: 'Rôle',
+                                            accessor: 'role',
+                                            width: 200,
+                                            filterMethod: (filter, row) => {
+                                            if (filter.value === "all") {
+                                              return true;
+                                            }
+                                            if (filter.value === "coach") {
+                                              return row[filter.id].includes("Coach") || row[filter.id].includes("coach");
+                                            }
+                                            if (filter.value === "joueur") {
+                                              return row[filter.id].includes("Joueur");
+                                            }
+                                            return row[filter.id] === "Ami";
+                                          },
+                                          Filter: ({ filter, onChange }) =>
+                                            <select onChange={event => onChange(event.target.value)}>
+                                              <option value="all">All</option>
+                                              <option value="coach">Coach</option>
+                                              <option value="joueur">Joueur</option>
+                                              <option value="ami">Ami</option>
+                                            </select>
+                                        },
+                                        {
+                                            Header: 'Taille',
+                                            accessor: 'height',
+                                            width: 100,
+                                            filterable: false,
+                                        },
+                                        {
+                                            Header: 'Poids',
+                                            accessor: 'weight',
+                                            width: 100,
+                                            filterable: false,
+                                        },
+                                    ]
+                                },
+                              ]}
               />
           )
       }
@@ -286,6 +287,23 @@ class TeamMembersList extends Component {
   componentDidMount(){
     this.getApiTeamMemberList();
 
+  }
+
+  renderEditable(cellInfo) {
+    return (
+      <div
+        contentEditable
+        suppressContentEditableWarning
+        onBlur={e => {
+          const members_data = [...this.state.members_data];
+          members_data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+          this.setState({ members_data });
+        }}
+        dangerouslySetInnerHTML={{
+          __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+        }}
+      />
+    );
   }
 
   render() {
