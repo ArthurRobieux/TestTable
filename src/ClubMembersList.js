@@ -5,12 +5,32 @@ import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
 import withFixedColumns from "react-table-hoc-fixed-columns";
-const ReactTableFixedColumns = withFixedColumns(ReactTable);
+
+import Chance from "chance";
+import checkboxHOC from "react-table/lib/hoc/selectTable";
+
+const CheckboxTable = checkboxHOC(ReactTable);
+
+const chance = new Chance();
+
+function getData(testData) {
+  const data = testData.map(item => {
+    const _id = chance.guid();
+    return {
+      _id,
+      ...item
+    };
+  });
+  return data;
+}
+
 
 class ClubMembersList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selection: [],
+      selectAll: false,
       members_data: [],
       columns: [
         {
@@ -56,14 +76,6 @@ class ClubMembersList extends Component {
                     Header: 'Teams',
                     accessor: 'teams',
                     width: 150,
-                    aggregate: vals => 'hey',
-                    Aggregated: row => {
-                        return (
-                            <span>
-                                Hey
-                            </span>
-                        );
-                    }
                 },
                 {
                     Header: 'Licence n°',
@@ -114,8 +126,6 @@ class ClubMembersList extends Component {
   // For each member in the API response, we will create a member and add him to state.members_data
   createDataFromJson(api_response){
 
-    console.log(api_response);
-
     let members_data = [];
 
     for(var i=0; i<api_response.results.length; i++){
@@ -133,7 +143,7 @@ class ClubMembersList extends Component {
       };
       members_data.push(new_member);
     }
-    this.setState({members_data: members_data})
+    this.setState({members_data: getData(members_data)});
   }
 
   // Onclick, show or hide pop-up, by giving him data
@@ -179,21 +189,83 @@ class ClubMembersList extends Component {
           </div>
       )}
     catch (error) {
-        console.error('No popup data.');
         return(<div id={"popup"}></div>)
     }
   }
 
+  // Add/delete lines to state.selection
+  toggleSelection = (key) => {
+    // start off with the existing state
+    let selection = [...this.state.selection];
+    const keyIndex = selection.indexOf(key);
+    // check to see if the key exists
+    if (keyIndex >= 0) {
+      // it does exist so we will remove it using destructing
+      selection = [
+        ...selection.slice(0, keyIndex),
+        ...selection.slice(keyIndex + 1)
+      ];
+    } else {
+      // it does not exist so add it
+      selection.push(key);
+    }
+    // update the state
+    this.setState({ selection });
+  };
+
+  // Add/delete all the lines from state.selection
+  toggleAll = () => {
+
+    const selectAll = !this.state.selectAll;
+    const selection = [];
+    if (selectAll) {
+      // we need to get at the internals of ReactTable
+      const wrappedInstance = this.checkboxTable.getWrappedInstance();
+      // the 'sortedData' property contains the currently accessible records based on the filter and sort
+      const currentRecords = wrappedInstance.getResolvedState().sortedData;
+      // we just push all the IDs onto the selection array
+      currentRecords.forEach(item => {
+        selection.push(item._original._id);
+      });
+    }
+    this.setState({ selectAll, selection });
+  };
+
+  // Return true if key-line is selected
+  isSelected = key => {
+    return this.state.selection.includes(key);
+  };
+
+  // Log selected lines
+  logSelection = () => {
+    for(var i=0; i<this.state.members_data.length; i++){
+        if(this.isSelected(this.state.members_data[i]._id)){
+            console.log(this.state.members_data[i]);
+        }
+    }
+  };
+
   // Show Table if there is data in the state.members_data
   showTable(){
       try{
+          // Get functions and checkbox props
+          const { toggleSelection, toggleAll, isSelected, logSelection } = this;
+          const { selectAll } = this.state;
+          const checkboxProps = {
+            selectAll,
+            isSelected,
+            toggleSelection,
+            toggleAll,
+            selectType: "checkbox",
+          };
+
           return(
-              <ReactTable data={this.state.members_data} noDataText="Loading .." columns={this.state.columns} defaultPageSize={10}
-                className="-striped -highlight react_table" filterable />
+                <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .." columns={this.state.columns} defaultPageSize={10}
+                className="-striped -highlight react_table" filterable {...checkboxProps}/>
           )
       }
       catch(error){
-          return("No data in state.members_data.");
+          console.log("No members_data!");
       }
   }
 
@@ -208,8 +280,11 @@ class ClubMembersList extends Component {
     return(
         <div>
 
+          <button onClick={this.logSelection}>Log Selection</button>
           {this.showTable()}
           {this.popUp()}
+
+          {this.state.selection}
 
         </div>
     );
