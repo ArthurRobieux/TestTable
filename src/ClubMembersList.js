@@ -10,6 +10,7 @@ import withFixedColumns from "react-table-hoc-fixed-columns";
 
 import Chance from "chance";
 import checkboxHOC from "react-table/lib/hoc/selectTable";
+import matchSorter from "match-sorter";
 
 const CheckboxTable = checkboxHOC(ReactTable);
 
@@ -58,11 +59,15 @@ class ClubMembersList extends Component {
                     Header: "First Name",
                     accessor: "first_name",
                     width: 100,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["first_name"] }),
+                    filterAll: true
                 },
                 {
                     Header: "Last Name",
                     accessor: "last_name",
                     width: 100,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["last_name"] }),
+                    filterAll: true
                 },
             ]
         },
@@ -73,11 +78,15 @@ class ClubMembersList extends Component {
                     Header: 'Email',
                     accessor: 'email',
                     width: 200,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["email"] }),
+                    filterAll: true
                 },
                 {
                     Header: 'Teams',
                     accessor: 'teams',
                     width: 150,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["teams"] }),
+                    filterAll: true
                 },
                 {
                     Header: 'Licence n°',
@@ -278,6 +287,7 @@ class ClubMembersList extends Component {
           <PopUp popup_content={this.state.popup_content}/>
 
           {/*See selection with checkbox  */}
+          {/*Appel à l'API pour affecter les joueurs à l'équipe choisie*/}
           <button onClick={this.logSelection}>Log Selection</button>
           {this.showSelection()}
 

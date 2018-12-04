@@ -4,6 +4,8 @@ import './App.css';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
+import matchSorter from 'match-sorter'
+
 import withFixedColumns from "react-table-hoc-fixed-columns";
 import PopUp from "./PopUp";
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
@@ -37,11 +39,15 @@ class TeamMembersList extends Component {
                     Header: "First Name",
                     accessor: "first_name",
                     width: 100,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["first_name"] }),
+                    filterAll: true
                 },
                 {
                     Header: "Last Name",
                     accessor: "last_name",
                     width: 100,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["last_name"] }),
+                    filterAll: true
                 },
             ]
         },
@@ -52,6 +58,8 @@ class TeamMembersList extends Component {
                     Header: 'Email',
                     accessor: 'email',
                     width: 200,
+                    filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ["email"] }),
+                    filterAll: true
                 },
                 {
                     Header: 'Telephone',
