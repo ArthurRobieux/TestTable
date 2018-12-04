@@ -91,6 +91,29 @@ class TeamMembersList extends Component {
                     Header: 'Rôle',
                     accessor: 'role',
                     width: 200,
+                    filterMethod: (filter, row) => {
+                    if (filter.value === "all") {
+                      return true;
+                    }
+                    if (filter.value === "coach") {
+                      return row[filter.id].includes("Coach") || row[filter.id].includes("coach");
+                    }
+                    if (filter.value === "joueur") {
+                      return row[filter.id].includes("Joueur");
+                    }
+                    return row[filter.id] === "Ami";
+                  },
+                  Filter: ({ filter, onChange }) =>
+                    <select
+                      onChange={event => onChange(event.target.value)}
+                      style={{ width: "100%" }}
+                      value={filter ? filter.value : "all"}
+                    >
+                      <option value="all">All</option>
+                      <option value="coach">Coach</option>
+                      <option value="joueur">Joueur</option>
+                      <option value="ami">Ami</option>
+                    </select>
                 },
                 {
                     Header: 'Taille',
