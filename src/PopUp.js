@@ -3,13 +3,25 @@ import './App.css';
 
 class PopUp extends Component {
 
+      // Onclick, show or hide pop-up, by giving him data
+      hidePopUp(popup_content){
+
+        let d = document.getElementById("popup");
+
+        d.style.visibility = "hidden";
+        d.style.opacity = "0";
+        d.style.width = "0";
+        d.style.height = "0";
+        
+      }
+
       // Pop-up content
       popUp(){
         try{
           return(
               <div id={"popup"}>
                 <img src={"/close.png"} className={"close_popup"}
-                     onClick={() => this.showPopUp()}
+                     onClick={() => this.hidePopUp()}
                      alt={"close"}/>
 
                 <div className={"popup_avatar_div"}>
