@@ -220,18 +220,18 @@ class ClubMembersList extends Component {
                                         {
                                             Header: "First Name",
                                             accessor: "first_name",
-                                            width: 100,
+                                            width: 150,
                                             Cell: this.renderEditable,
-                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'first_name'),
-                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'first_name'),
+                                            filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
+                                            Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
                                         },
                                         {
                                             Header: "Last Name",
                                             accessor: "last_name",
-                                            width: 100,
+                                            width: 150,
                                             Cell: this.renderEditable,
-                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'last_name'),
-                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'last_name'),
+                                            filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
+                                            Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
                                         },
                                     ]
                                 },
@@ -245,19 +245,19 @@ class ClubMembersList extends Component {
                                             Cell: this.renderEditable,
                                         },
                                         {
+                                            Header: 'Teams',
+                                            accessor: 'teams',
+                                            width: 175,
+                                            Cell: this.renderEditable,
+                                            filterMethod: (filter, row) => this.getCheckboxFilterMethod(filter, row, 'teams'),
+                                            Filter: ({ filter, onChange }) => this.getCheckboxFilter(filter, onChange, 'teams'),
+                                        },
+                                        {
                                             Header: 'Telephone',
                                             accessor: 'phone_number',
                                             width: 150,
                                             filterable: false,
                                             Cell: this.renderEditable,
-                                        },
-                                        {
-                                            Header: 'Teams',
-                                            accessor: 'teams',
-                                            width: 150,
-                                            Cell: this.renderEditable,
-                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'teams'),
-                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'teams'),
                                         },
                                         {
                                             Header: 'Taille',
@@ -282,9 +282,12 @@ class ClubMembersList extends Component {
       }
   }
 
-  // Get filter method
-  getFilterMethod(filter, row, column_name){
+  // Filter with only 1 choice
 
+  // Get filter method
+  getSelectFilterMethod(filter, row, column_name){
+
+      // console.log("change");
 
       let options = [];
 
@@ -293,19 +296,24 @@ class ClubMembersList extends Component {
                 options.push(this.state.members_data[i][column_name]);
             }
       }
-    if (filter.value === "All") {
-      return true;
-    }
 
-    for(var j=0; j<options.length; j++){
-        if (filter.value === options[j]) {
-            return row[filter.id] === options[j];
-        }
+      // console.log(filter);
+      // console.log(row);
+
+      // Check actual value on the filter
+      if (filter.value === "All") {
+        return true;
+      }
+
+      for(var j=0; j<options.length; j++){
+          if (filter.value === options[j]) {
+              return row[filter.id] === options[j];
+          }
+      }
     }
-  }
 
   // Get filter
-  getFilter(filter, onChange, column_name){
+  getSelectFilter(filter, onChange, column_name){
 
       let options = [];
 
@@ -317,18 +325,76 @@ class ClubMembersList extends Component {
 
       options = options.sort();
 
-      // Get all te possible elements and create select options
+      // Create select options
       return(
-        <div>
+          <div>
             <select onChange={event => onChange(event.target.value)}>
                 <option value='All'>All</option>
                 {options.map(option => (
                     <option value={option}>{option}</option>
                 ))}
             </select>
-        </div>
+          </div>
       );
   }
+
+  // Filter with many choices
+
+  // Get filter method
+  getCheckboxFilterMethod(filter, row, column_name){
+
+      // Get available options
+      let options = [];
+      for(var i=0; i<this.state.members_data.length; i++){
+            if(!options.includes(this.state.members_data[i][column_name])){
+                options.push(this.state.members_data[i][column_name]);
+            }
+      }
+
+      // If option checkbox is checked, add this option
+      let checked_checkbox = [];
+      for(var j=0; j<options.length; j++){
+          let checkbox = document.getElementById(options[j]);
+          if (checkbox.checked) {
+              checked_checkbox.push(options[j]);
+          }
+      }
+
+      // Return all the members with checked option
+      if(checked_checkbox.length === 0){return true}
+      return(
+          checked_checkbox.includes(row[filter.id])
+      );
+    }
+
+  // Get filter
+  getCheckboxFilter(filter, onChange, column_name){
+
+      let options = [];
+
+      for(var i=0; i<this.state.members_data.length; i++){
+            if(!options.includes(this.state.members_data[i][column_name])){
+                options.push(this.state.members_data[i][column_name]);
+            }
+      }
+
+      options = options.sort();
+
+      // Create a checkbox for each team
+      return(
+          <div>
+            {options.map(option => (
+                <div>
+                    <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
+                    {option}
+                </div>
+            ))}
+        </div>
+
+      );
+  }
+
+
 
   // Get members data from the API and convert them in state.members_data
   componentDidMount(){
