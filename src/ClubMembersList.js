@@ -287,29 +287,26 @@ class ClubMembersList extends Component {
   // Get filter method
   getSelectFilterMethod(filter, row, column_name){
 
-      // console.log("change");
-
-      let options = [];
-
-      for(var i=0; i<this.state.members_data.length; i++){
-            if(!options.includes(this.state.members_data[i][column_name])){
-                options.push(this.state.members_data[i][column_name]);
-            }
-      }
-
-      // console.log(filter);
-      // console.log(row);
-
-      // Check actual value on the filter
       if (filter.value === "All") {
         return true;
       }
+      return row[filter.id] !== undefined ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false;
 
-      for(var j=0; j<options.length; j++){
-          if (filter.value === options[j]) {
-              return row[filter.id] === options[j];
-          }
-      }
+      // let options = [];
+      // for(var i=0; i<this.state.members_data.length; i++){
+      //       if(!options.includes(this.state.members_data[i][column_name])){
+      //           options.push(this.state.members_data[i][column_name]);
+      //       }
+      // }
+      // // Check actual value on the filter
+      // if (filter.value === "All") {
+      //   return true;
+      // }
+      // for(var j=0; j<options.length; j++){
+      //     if (filter.value === options[j]) {
+      //         return row[filter.id] === options[j];
+      //     }
+      // }
     }
 
   // Get filter
@@ -334,6 +331,8 @@ class ClubMembersList extends Component {
                     <option value={option}>{option}</option>
                 ))}
             </select>
+            <br/>
+            <input id={"input_filter"} type={"text"} onChange={event => onChange(event.target.value)} placeholder={"Rechercher.."}/>
           </div>
       );
   }
