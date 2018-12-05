@@ -191,7 +191,7 @@ class TeamMembersList extends Component {
 
           return(
               <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
-                             defaultPageSize={-1} showPagination={false}
+                             defaultPageSize={20}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
@@ -221,6 +221,8 @@ class TeamMembersList extends Component {
                                             accessor: "first_name",
                                             width: 100,
                                             Cell: this.renderEditable,
+                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'first_name'),
+                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'first_name'),
                                         },
                                         {
                                             Header: "Last Name",
@@ -250,25 +252,8 @@ class TeamMembersList extends Component {
                                             Header: 'Rôle',
                                             accessor: 'role',
                                             width: 200,
-                                            filterMethod: (filter, row) => {
-                                            if (filter.value === "all") {
-                                              return true;
-                                            }
-                                            if (filter.value === "coach") {
-                                              return row[filter.id].includes("Coach") || row[filter.id].includes("coach");
-                                            }
-                                            if (filter.value === "joueur") {
-                                              return row[filter.id].includes("Joueur");
-                                            }
-                                            return row[filter.id] === "Ami";
-                                          },
-                                          Filter: ({ filter, onChange }) =>
-                                            <select onChange={event => onChange(event.target.value)}>
-                                              <option value="all">All</option>
-                                              <option value="coach">Coach</option>
-                                              <option value="joueur">Joueur</option>
-                                              <option value="ami">Ami</option>
-                                            </select>
+                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'role'),
+                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'role'),
                                         },
                                         {
                                             Header: 'Taille',
@@ -294,6 +279,55 @@ class TeamMembersList extends Component {
           return("No data in state.members_data.");
       }
   }
+
+  // Get filter method
+  getFilterMethod(filter, row, column_name){
+
+
+      let options = [];
+
+      for(var i=0; i<this.state.members_data.length; i++){
+            if(!options.includes(this.state.members_data[i][column_name])){
+                options.push(this.state.members_data[i][column_name]);
+            }
+      }
+    if (filter.value === "All") {
+      return true;
+    }
+
+    for(var j=0; j<options.length; j++){
+        if (filter.value === options[j]) {
+            return row[filter.id] === options[j];
+        }
+    }
+  }
+
+  // Get filter
+  getFilter(filter, onChange, column_name){
+
+      let options = [];
+
+      for(var i=0; i<this.state.members_data.length; i++){
+            if(!options.includes(this.state.members_data[i][column_name])){
+                options.push(this.state.members_data[i][column_name]);
+            }
+      }
+
+      options = options.sort();
+
+      // Get all te possible elements and create select options
+      return(
+        <div>
+            <select onChange={event => onChange(event.target.value)}>
+                <option value='All'>All</option>
+                {options.map(option => (
+                    <option value={option}>{option}</option>
+                ))}
+            </select>
+        </div>
+      );
+  }
+
 
   // Get members data from the API and convert them in state.members_data
   componentDidMount(){

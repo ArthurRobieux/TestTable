@@ -192,7 +192,7 @@ class ClubMembersList extends Component {
 
           return(
                 <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
-                             defaultPageSize={-1} showPagination={false}
+                             defaultPageSize={20}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
@@ -222,12 +222,16 @@ class ClubMembersList extends Component {
                                             accessor: "first_name",
                                             width: 100,
                                             Cell: this.renderEditable,
+                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'first_name'),
+                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'first_name'),
                                         },
                                         {
                                             Header: "Last Name",
                                             accessor: "last_name",
                                             width: 100,
                                             Cell: this.renderEditable,
+                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'last_name'),
+                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'last_name'),
                                         },
                                     ]
                                 },
@@ -252,6 +256,8 @@ class ClubMembersList extends Component {
                                             accessor: 'teams',
                                             width: 150,
                                             Cell: this.renderEditable,
+                                            filterMethod: (filter, row) => this.getFilterMethod(filter, row, 'teams'),
+                                            Filter: ({ filter, onChange }) => this.getFilter(filter, onChange, 'teams'),
                                         },
                                         {
                                             Header: 'Taille',
@@ -274,6 +280,54 @@ class ClubMembersList extends Component {
       catch(error){
           console.log("No members_data!");
       }
+  }
+
+  // Get filter method
+  getFilterMethod(filter, row, column_name){
+
+
+      let options = [];
+
+      for(var i=0; i<this.state.members_data.length; i++){
+            if(!options.includes(this.state.members_data[i][column_name])){
+                options.push(this.state.members_data[i][column_name]);
+            }
+      }
+    if (filter.value === "All") {
+      return true;
+    }
+
+    for(var j=0; j<options.length; j++){
+        if (filter.value === options[j]) {
+            return row[filter.id] === options[j];
+        }
+    }
+  }
+
+  // Get filter
+  getFilter(filter, onChange, column_name){
+
+      let options = [];
+
+      for(var i=0; i<this.state.members_data.length; i++){
+            if(!options.includes(this.state.members_data[i][column_name])){
+                options.push(this.state.members_data[i][column_name]);
+            }
+      }
+
+      options = options.sort();
+
+      // Get all te possible elements and create select options
+      return(
+        <div>
+            <select onChange={event => onChange(event.target.value)}>
+                <option value='All'>All</option>
+                {options.map(option => (
+                    <option value={option}>{option}</option>
+                ))}
+            </select>
+        </div>
+      );
   }
 
   // Get members data from the API and convert them in state.members_data
@@ -316,14 +370,14 @@ class ClubMembersList extends Component {
     return(
         <div>
 
-          {this.showTable()}
-          <PopUp popup_content={this.state.popup_content}/>
-
           {/*See selection with checkbox  */}
           {/*Appel à l'API pour affecter les joueurs à l'équipe choisie*/}
-          <button onClick={this.changeEditionMode}>Change Edition Mode</button>
+          <button onClick={this.changeEditionMode}>Edition Mode</button>
           <button onClick={this.logSelection}>Log Selection</button>
           {this.showSelection()}
+
+          {this.showTable()}
+          <PopUp popup_content={this.state.popup_content}/>
 
         </div>
     );
