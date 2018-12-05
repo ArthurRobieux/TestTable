@@ -34,6 +34,7 @@ class ClubMembersList extends Component {
       selection: [],
       selectAll: false,
       members_data: [],
+      isEditionMode: false,
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
@@ -169,6 +170,12 @@ class ClubMembersList extends Component {
     )
   };
 
+  // Log selected lines
+  changeEditionMode = () => {
+    this.setState({isEditionMode: !this.state.isEditionMode});
+    console.log(this.state.isEditionMode)
+  };
+
   // Show Table if there is data in the state.members_data
   showTable(){
       try{
@@ -185,7 +192,7 @@ class ClubMembersList extends Component {
 
           return(
                 <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
-                             defaultPageSize={10}
+                             defaultPageSize={-1} showPagination={false}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
@@ -220,6 +227,7 @@ class ClubMembersList extends Component {
                                             Header: "Last Name",
                                             accessor: "last_name",
                                             width: 100,
+                                            Cell: this.renderEditable,
                                         },
                                     ]
                                 },
@@ -230,36 +238,20 @@ class ClubMembersList extends Component {
                                             Header: 'Email',
                                             accessor: 'email',
                                             width: 200,
+                                            Cell: this.renderEditable,
                                         },
                                         {
                                             Header: 'Telephone',
                                             accessor: 'phone_number',
                                             width: 150,
                                             filterable: false,
+                                            Cell: this.renderEditable,
                                         },
                                         {
-                                            Header: 'Rôle',
-                                            accessor: 'role',
-                                            width: 200,
-                                            filterMethod: (filter, row) => {
-                                            if (filter.value === "all") {
-                                              return true;
-                                            }
-                                            if (filter.value === "coach") {
-                                              return row[filter.id].includes("Coach") || row[filter.id].includes("coach");
-                                            }
-                                            if (filter.value === "joueur") {
-                                              return row[filter.id].includes("Joueur");
-                                            }
-                                            return row[filter.id] === "Ami";
-                                          },
-                                          Filter: ({ filter, onChange }) =>
-                                            <select onChange={event => onChange(event.target.value)}>
-                                              <option value="all">All</option>
-                                              <option value="coach">Coach</option>
-                                              <option value="joueur">Joueur</option>
-                                              <option value="ami">Ami</option>
-                                            </select>
+                                            Header: 'Teams',
+                                            accessor: 'teams',
+                                            width: 150,
+                                            Cell: this.renderEditable,
                                         },
                                         {
                                             Header: 'Taille',
@@ -291,22 +283,34 @@ class ClubMembersList extends Component {
   }
 
   renderEditable(cellInfo) {
-    return (
-      <div
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={e => {
-          const members_data = [...this.state.members_data];
-          members_data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ members_data });
-        }}
-        dangerouslySetInnerHTML={{
-          __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
-        }}
-      />
-    );
-  }
+      if(this.state.isEditionMode) {
+          return (
+              <div
+                  style={{backgroundColor: "#fafafa"}}
+                  contentEditable
+                  suppressContentEditableWarning
+                  onBlur={e => {
+                      const members_data = [...this.state.members_data];
+                      members_data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+                      this.setState({members_data});
+                  }}
+                  dangerouslySetInnerHTML={{
+                      __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+                  }}
+              />
+          );
+      }
+      else {
+          return (
+              <div
 
+                  dangerouslySetInnerHTML={{
+                      __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+                  }}
+              />
+          );
+      }
+  }
   render() {
 
     return(
@@ -317,6 +321,7 @@ class ClubMembersList extends Component {
 
           {/*See selection with checkbox  */}
           {/*Appel à l'API pour affecter les joueurs à l'équipe choisie*/}
+          <button onClick={this.changeEditionMode}>Change Edition Mode</button>
           <button onClick={this.logSelection}>Log Selection</button>
           {this.showSelection()}
 

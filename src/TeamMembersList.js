@@ -33,6 +33,7 @@ class TeamMembersList extends Component {
       members_data: [],
       selection: [],
       selectAll: false,
+      isEditionMode: false,
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
@@ -168,6 +169,12 @@ class TeamMembersList extends Component {
     )
   };
 
+  // Log selected lines
+  changeEditionMode = () => {
+    this.setState({isEditionMode: !this.state.isEditionMode});
+    console.log(this.state.isEditionMode)
+  };
+
   // Show Table if there is data in the state.members_data
   showTable(){
       try{
@@ -184,7 +191,7 @@ class TeamMembersList extends Component {
 
           return(
               <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
-                             defaultPageSize={10}
+                             defaultPageSize={-1} showPagination={false}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
@@ -219,6 +226,7 @@ class TeamMembersList extends Component {
                                             Header: "Last Name",
                                             accessor: "last_name",
                                             width: 100,
+                                            Cell: this.renderEditable,
                                         },
                                     ]
                                 },
@@ -229,12 +237,14 @@ class TeamMembersList extends Component {
                                             Header: 'Email',
                                             accessor: 'email',
                                             width: 200,
+                                            Cell: this.renderEditable,
                                         },
                                         {
                                             Header: 'Telephone',
                                             accessor: 'phone_number',
                                             width: 150,
                                             filterable: false,
+                                            Cell: this.renderEditable,
                                         },
                                         {
                                             Header: 'Rôle',
@@ -265,12 +275,14 @@ class TeamMembersList extends Component {
                                             accessor: 'height',
                                             width: 100,
                                             filterable: false,
+                                            Cell: this.renderEditable,
                                         },
                                         {
                                             Header: 'Poids',
                                             accessor: 'weight',
                                             width: 100,
                                             filterable: false,
+                                            Cell: this.renderEditable,
                                         },
                                     ]
                                 },
@@ -290,20 +302,33 @@ class TeamMembersList extends Component {
   }
 
   renderEditable(cellInfo) {
-    return (
-      <div
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={e => {
-          const members_data = [...this.state.members_data];
-          members_data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ members_data });
-        }}
-        dangerouslySetInnerHTML={{
-          __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
-        }}
-      />
-    );
+      if(this.state.isEditionMode) {
+          return (
+              <div
+                  style={{backgroundColor: "#fafafa"}}
+                  contentEditable
+                  suppressContentEditableWarning
+                  onBlur={e => {
+                      const members_data = [...this.state.members_data];
+                      members_data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+                      this.setState({members_data});
+                  }}
+                  dangerouslySetInnerHTML={{
+                      __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+                  }}
+              />
+          );
+      }
+      else {
+          return (
+              <div
+
+                  dangerouslySetInnerHTML={{
+                      __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+                  }}
+              />
+          );
+      }
   }
 
   render() {
@@ -316,6 +341,7 @@ class TeamMembersList extends Component {
 
           {/*See selection with checkbox  */}
           {/*Appel à l'API pour affecter les joueurs à l'équipe choisie*/}
+          <button onClick={this.changeEditionMode}>Change Edition Mode</button>
           <button onClick={this.logSelection}>Log Selection</button>
           {this.showSelection()}
 
