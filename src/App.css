@@ -78,13 +78,32 @@
   overflow-x: scroll;
 }
 
-#text_filter, #select_filter{
+#text_filter{
   width: 100px;
   height: 25px;
   font-size: 12px;
   display: block;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: grey;
+  background: transparent;
+  margin: 5px;
+}
+
+#select_filter{
+  width: 100px;
+  height: 25px;
+  font-size: 12px;
+  display: block;
+  margin: 5px;
 }
 
 #checkbox_filter{
   text-align: left;
+  margin: 5px;
+}
+
+.profile_ref{
+  text-decoration: none;
+  color: black;
 }

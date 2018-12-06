@@ -275,6 +275,7 @@ class ClubMembersList extends Component {
                                     ]
                                 },
                               ]}
+                              getTrProps={this.onRowClick}
               />
           )
       }
@@ -282,6 +283,18 @@ class ClubMembersList extends Component {
           console.log("No members_data!");
       }
   }
+
+    onRowClick = (state, rowInfo, column, instance) => {
+        return {
+            onClick: e => {
+                console.log('A Td Element was clicked!');
+                console.log('it produced this event:', e);
+                console.log('It was in this column:', column);
+                console.log('It was in this row:', rowInfo);
+                console.log('It was in this table instance:', instance);
+            }
+        }
+    };
 
   // Filter with only 1 choice
 
@@ -331,6 +344,7 @@ class ClubMembersList extends Component {
                     <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
                         placeholder={"Search.."}/><br/>
               </div>
+              <br/>
             {/*Select filter  */}
             <div id={"select_filter"}>
             <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
@@ -415,8 +429,9 @@ class ClubMembersList extends Component {
             {/*Text filter*/}
             <div id={"text_filter"}>
                 <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                       placeholder={"Search.."}/><br/>
+                       placeholder={"Search.."}/>
             </div>
+            <br/>
             {/*Checkbox Filter*/}
             <div id={"checkbox_filter"}>
                 <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
@@ -460,13 +475,16 @@ class ClubMembersList extends Component {
           );
       }
       else {
+          const id = this.state.members_data[cellInfo.index].id;
           return (
-              <div
-
-                  dangerouslySetInnerHTML={{
-                      __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
-                  }}
-              />
+              // Change URL to static URL
+              <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+                  <div
+                      dangerouslySetInnerHTML={{
+                          __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+                      }}
+                  />
+              </a>
           );
       }
   }
