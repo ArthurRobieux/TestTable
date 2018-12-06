@@ -479,8 +479,8 @@ class ClubMembersList extends Component {
                                 Account not activated
                           </div>
 
-                          <button className="email_relance">
-                              Relancer
+                          <button className="email_reminder">
+                              Reminder
                           </button>
                       </div>
                   );
@@ -515,14 +515,43 @@ class ClubMembersList extends Component {
     return(
         <div>
 
-          {/*See selection with checkbox  */}
-          {/*Appel à l'API pour affecter les joueurs à l'équipe choisie*/}
-          <button onClick={this.changeEditionMode}>Edition Mode</button>
-          <button onClick={this.logSelection}>Log Selection</button>
-          {this.showSelection()}
+          {/* Menu 1 */}
+          <div>
+              Menu 1<br/>
 
-          {this.showTable()}
-          <PopUp popup_content={this.state.popup_content}/>
+              {/*General Filter*/}
+              <input className={"action_filter"} type={"text"} placeholder={"Search.."}/>
+              {/*Affect players to a team*/}
+              <button className={"action_button"}>Affect player to team</button>
+              {/*Delete players from club*/}
+              <button className={"action_button"}>Delete player from club</button>
+              {/*Export members list*/}
+              <button className={"action_button"}>Export</button>
+              {/*Add a member*/}
+              <button className={"action_button"}>Add a member</button>
+              {/*Edition Mode*/}
+              <button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>
+
+              {/*Log Selection*/}
+              <button onClick={this.logSelection} className={"action_button"}>Log Selection</button>
+              {this.showSelection()}
+
+          </div>
+
+          <hr color="black" size="1"/>
+
+          {/* Menu 2 */}
+          <div>
+              Menu 2<br/>
+          </div>
+
+          <hr color="black" size="1"/>
+
+          {/* Table */}
+          <div>
+              {this.showTable()}
+              <PopUp popup_content={this.state.popup_content}/>
+          </div>
 
         </div>
     );
