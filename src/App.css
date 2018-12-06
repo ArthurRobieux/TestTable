@@ -77,3 +77,14 @@
   overflow-y: hidden;
   overflow-x: scroll;
 }
+
+#text_filter, #select_filter{
+  width: 100px;
+  height: 25px;
+  font-size: 12px;
+  display: block;
+}
+
+#checkbox_filter{
+  text-align: left;
+}

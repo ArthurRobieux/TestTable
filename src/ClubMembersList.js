@@ -243,6 +243,7 @@ class ClubMembersList extends Component {
                                             accessor: 'email',
                                             width: 200,
                                             Cell: this.renderEditable,
+                                            Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
                                         },
                                         {
                                             Header: 'Teams',
@@ -324,15 +325,33 @@ class ClubMembersList extends Component {
 
       // Create select options
       return(
-          <div>
-            <select onChange={event => onChange(event.target.value)}>
+          <div id={"filters"}>
+              {/*Text filter*/}
+              <div id={"text_filter"}>
+                    <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                        placeholder={"Search.."}/><br/>
+              </div>
+            {/*Select filter  */}
+            <div id={"select_filter"}>
+            <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
                 <option value='All'>All</option>
                 {options.map(option => (
                     <option value={option}>{option}</option>
                 ))}
             </select>
-            <br/>
-            <input id={"input_filter"} type={"text"} onChange={event => onChange(event.target.value)} placeholder={"Rechercher.."}/>
+            </div>
+          </div>
+      );
+  }
+
+  // Get filter
+  getTextFilter(filter, onChange, column_name){
+      return(
+          <div id={"filters"}>
+              <div id={"text_filter"}>
+                <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                       placeholder={"Search.."}/>
+              </div>
           </div>
       );
   }
@@ -359,10 +378,21 @@ class ClubMembersList extends Component {
           }
       }
 
-      // Return all the members with checked option
-      if(checked_checkbox.length === 0){return true}
+      // If textual search
+      if(filter.value !== 'on'){
+          return String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase())
+      }
+      // If all checked
+      else if(document.getElementById("all_checkbox").checked){
+          return true
+      }
+      // If no checkbox checked and no textual seach
+      else if(checked_checkbox.length === 0){
+          return true
+      }
+      // If checkbox checked
       return(
-          checked_checkbox.includes(row[filter.id])
+          checked_checkbox.includes(row[filter.id] || String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()))
       );
     }
 
@@ -381,13 +411,23 @@ class ClubMembersList extends Component {
 
       // Create a checkbox for each team
       return(
-          <div>
-            {options.map(option => (
-                <div>
-                    <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
-                    {option}
-                </div>
-            ))}
+          <div id={"filters"}>
+            {/*Text filter*/}
+            <div id={"text_filter"}>
+                <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                       placeholder={"Search.."}/><br/>
+            </div>
+            {/*Checkbox Filter*/}
+            <div id={"checkbox_filter"}>
+                <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
+                All
+                {options.map(option => (
+                    <div>
+                        <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
+                        {option}
+                    </div>
+                ))}
+            </div>
         </div>
 
       );
