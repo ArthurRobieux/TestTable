@@ -35,6 +35,7 @@ class ClubMembersList extends Component {
       selectAll: false,
       members_data: [],
       isEditionMode: false,
+      search: '',
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
@@ -191,91 +192,130 @@ class ClubMembersList extends Component {
             selectType: "checkbox",
           };
 
+          // Define columns
+          let columns = [
+                            {
+                                Header: "Profile",
+                                fixed: "left",
+                                columns: [
+                                    {
+                                        Header: '',
+                                        accessor: 'avatar',
+                                        width: 40,
+                                        filterable: false,
+                                        Cell: profile => (<img src={profile.value.avatar["120x120"]}
+                                                               alt={profile.value.avatar["120x120"]}
+                                                               className={"avatar"}
+                                                               onClick={() => this.showPopUp(profile.value)}/>),
+                                    },
+                                    {
+                                        Header: 'Id',
+                                        accessor: 'id',
+                                        width: 50,
+                                        filterable: false,
+                                    },
+                                    {
+                                        Header: "First Name",
+                                        accessor: "first_name",
+                                        width: 150,
+                                        Cell: this.renderEditable,
+                                        filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
+                                        Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
+                                    },
+                                    {
+                                        Header: "Last Name",
+                                        accessor: "last_name",
+                                        width: 150,
+                                        Cell: this.renderEditable,
+                                        filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
+                                        Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
+                                    },
+                                ]
+                            },
+                            {
+                                Header: "Infos",
+                                columns: [
+                                    {
+                                        Header: 'Email',
+                                        accessor: 'email',
+                                        width: 250,
+                                        Cell: this.renderEditable,
+                                        Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
+                                    },
+                                    {
+                                        Header: 'Teams',
+                                        accessor: 'teams',
+                                        width: 175,
+                                        Cell: this.renderEditable,
+                                        filterMethod: (filter, row) => this.getCheckboxFilterMethod(filter, row, 'teams'),
+                                        Filter: ({ filter, onChange }) => this.getCheckboxFilter(filter, onChange, 'teams'),
+                                    },
+                                    {
+                                        Header: 'Telephone',
+                                        accessor: 'phone_number',
+                                        width: 150,
+                                        filterable: false,
+                                        Cell: this.renderEditable,
+                                    },
+                                    {
+                                        Header: 'Taille',
+                                        accessor: 'height',
+                                        width: 100,
+                                        filterable: false,
+                                    },
+                                    {
+                                        Header: 'Poids',
+                                        accessor: 'weight',
+                                        width: 100,
+                                        filterable: false,
+                                    },
+                                ]
+                            },
+                        ];
+
+          let list_columns = [];
+
+          for(var i=0; i<columns.length; i++){
+              for(var j=0; j<columns[i].columns.length; j++){
+                  list_columns.push(columns[i].columns[j].accessor);
+              }
+          }
+
+          // Get data and filter if general search
+          // let data = this.state.members_data;
+          //
+          // if (this.state.search) {
+          //     // For each row/member
+          //     data = data.filter(row => {
+          //         // For each column
+          //         for(var k=0; k<list_columns.length; k++){
+          //             // If search === column value
+          //             if(String(row[list_columns[k]]).toLowerCase().includes(this.state.search.toLowerCase())){
+          //                 return true
+          //             }
+          //         }
+          //         return false
+          //    });
+          // }
+
+          let data = this.state.members_data;
+
+          if (this.state.search) {
+              data = data.filter(row => {
+                return String(row['first_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['last_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['email']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['teams']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['phone_number']).toLowerCase().includes(this.state.search.toLowerCase())
+              });
+          }
+
           return(
-                <CheckboxTable ref={r => (this.checkboxTable = r)} data={this.state.members_data} noDataText="Loading .."
-                             defaultPageSize={20}
+                <CheckboxTable ref={r => (this.checkboxTable = r)} data={data} noDataText="Loading .."
+                             defaultPageSize={20} columns={columns}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
-                             columns={[
-                                {
-                                    Header: "Profile",
-                                    fixed: "left",
-                                    columns: [
-                                        {
-                                            Header: '',
-                                            accessor: 'avatar',
-                                            width: 40,
-                                            filterable: false,
-                                            Cell: profile => (<img src={profile.value.avatar["120x120"]}
-                                                                   alt={profile.value.avatar["120x120"]}
-                                                                   className={"avatar"}
-                                                                   onClick={() => this.showPopUp(profile.value)}/>),
-                                        },
-                                        {
-                                            Header: 'Id',
-                                            accessor: 'id',
-                                            width: 50,
-                                            filterable: false,
-                                        },
-                                        {
-                                            Header: "First Name",
-                                            accessor: "first_name",
-                                            width: 150,
-                                            Cell: this.renderEditable,
-                                            filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
-                                            Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
-                                        },
-                                        {
-                                            Header: "Last Name",
-                                            accessor: "last_name",
-                                            width: 150,
-                                            Cell: this.renderEditable,
-                                            filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
-                                            Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
-                                        },
-                                    ]
-                                },
-                                {
-                                    Header: "Infos",
-                                    columns: [
-                                        {
-                                            Header: 'Email',
-                                            accessor: 'email',
-                                            width: 250,
-                                            Cell: this.renderEditable,
-                                            Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
-                                        },
-                                        {
-                                            Header: 'Teams',
-                                            accessor: 'teams',
-                                            width: 175,
-                                            Cell: this.renderEditable,
-                                            filterMethod: (filter, row) => this.getCheckboxFilterMethod(filter, row, 'teams'),
-                                            Filter: ({ filter, onChange }) => this.getCheckboxFilter(filter, onChange, 'teams'),
-                                        },
-                                        {
-                                            Header: 'Telephone',
-                                            accessor: 'phone_number',
-                                            width: 150,
-                                            filterable: false,
-                                            Cell: this.renderEditable,
-                                        },
-                                        {
-                                            Header: 'Taille',
-                                            accessor: 'height',
-                                            width: 100,
-                                            filterable: false,
-                                        },
-                                        {
-                                            Header: 'Poids',
-                                            accessor: 'weight',
-                                            width: 100,
-                                            filterable: false,
-                                        },
-                                    ]
-                                },
-                              ]}
               />
           )
       }
@@ -294,21 +334,6 @@ class ClubMembersList extends Component {
       }
       return row[filter.id] !== undefined ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false;
 
-      // let options = [];
-      // for(var i=0; i<this.state.members_data.length; i++){
-      //       if(!options.includes(this.state.members_data[i][column_name])){
-      //           options.push(this.state.members_data[i][column_name]);
-      //       }
-      // }
-      // // Check actual value on the filter
-      // if (filter.value === "All") {
-      //   return true;
-      // }
-      // for(var j=0; j<options.length; j++){
-      //     if (filter.value === options[j]) {
-      //         return row[filter.id] === options[j];
-      //     }
-      // }
     }
 
   // Get filter
@@ -445,6 +470,19 @@ class ClubMembersList extends Component {
   }
 
   renderEditable(cellInfo) {
+
+      let members_data = this.state.members_data;
+
+      if (this.state.search) {
+          members_data = members_data.filter(row => {
+            return String(row['first_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                   String(row['last_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                   String(row['email']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                   String(row['teams']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                   String(row['phone_number']).toLowerCase().includes(this.state.search.toLowerCase())
+          });
+      }
+
       // If edition mode
       if(this.state.isEditionMode) {
           return (
@@ -453,12 +491,11 @@ class ClubMembersList extends Component {
                   contentEditable
                   suppressContentEditableWarning
                   onBlur={e => {
-                      const members_data = [...this.state.members_data];
                       members_data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
                       this.setState({members_data});
                   }}
                   dangerouslySetInnerHTML={{
-                      __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
+                      __html: members_data[cellInfo.index][cellInfo.column.id]
                   }}
               />
           );
@@ -468,12 +505,12 @@ class ClubMembersList extends Component {
           // If column === email
           if(cellInfo.column.id === 'email'){
               // If status === pending
-              if(this.state.members_data[cellInfo.index].status === 'pending') {
-                  const id = this.state.members_data[cellInfo.index].id;
+              if(members_data[cellInfo.index].status === 'pending') {
+                  const id = members_data[cellInfo.index].id;
                   return (
                       <div className="email_content">
                           <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
-                              {this.state.members_data[cellInfo.index][cellInfo.column.id]}
+                              {members_data[cellInfo.index][cellInfo.column.id]}
                           </a>
                           <div className="email_warning">
                                 Account not activated
@@ -485,7 +522,7 @@ class ClubMembersList extends Component {
                       </div>
                   );
               }
-              else if(this.state.members_data[cellInfo.index].status === 'not_invited'){
+              else if(members_data[cellInfo.index].status === 'not_invited'){
                   return (
                       <div className="email_warning">
                           No email for this account
@@ -499,17 +536,18 @@ class ClubMembersList extends Component {
           }
 
           // If column !== email
-          const id = this.state.members_data[cellInfo.index].id;
+          const id = members_data[cellInfo.index].id;
           return (
               // Change URL to static URL
               <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
                   <div>
-                      {this.state.members_data[cellInfo.index][cellInfo.column.id]}
+                      {members_data[cellInfo.index][cellInfo.column.id]}
                   </div>
               </a>
           );
       }
   }
+
   render() {
 
     return(
@@ -517,23 +555,18 @@ class ClubMembersList extends Component {
 
           {/* Menu 1 */}
           <div>
-              Menu 1<br/>
 
-              {/*General Filter*/}
-              <input className={"action_filter"} type={"text"} placeholder={"Search.."}/>
-              {/*Affect players to a team*/}
-              <button className={"action_button"}>Affect player to team</button>
-              {/*Delete players from club*/}
-              <button className={"action_button"}>Delete player from club</button>
-              {/*Export members list*/}
-              <button className={"action_button"}>Export</button>
-              {/*Add a member*/}
-              <button className={"action_button"}>Add a member</button>
               {/*Edition Mode*/}
               <button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>
-
               {/*Log Selection*/}
               <button onClick={this.logSelection} className={"action_button"}>Log Selection</button>
+              {/*Export members list*/}
+              <button className={"action_button"}>Export</button>
+              {/*Print members list*/}
+              <button className={"action_button"}>Print</button>
+              {/*Add a member*/}
+              <button className={"action_button"}>Add a member</button>
+
               {this.showSelection()}
 
           </div>
@@ -542,7 +575,17 @@ class ClubMembersList extends Component {
 
           {/* Menu 2 */}
           <div>
-              Menu 2<br/>
+
+              {/*General Filter*/}
+              <input className={"action_filter"} type={"text"} placeholder={"Search.."}
+                     value={this.state.search} onChange={e => this.setState({search: e.target.value})}/>
+              {/*Affect players to a team*/}
+              <button className={"action_button"}>Affect player to team</button>
+              {/*Delete players from club*/}
+              <button className={"action_button"}>Delete player from club</button>
+              {/*Send a global message*/}
+              <button className={"action_button"}>Send a message</button>
+
           </div>
 
           <hr color="black" size="1"/>
