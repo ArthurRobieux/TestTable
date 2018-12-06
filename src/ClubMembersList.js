@@ -6,7 +6,7 @@ import 'react-table/react-table.css'
 
 import PopUp from "./PopUp"
 
-import withFixedColumns from "react-table-hoc-fixed-columns";
+// import withFixedColumns from "react-table-hoc-fixed-columns";
 
 import Chance from "chance";
 import checkboxHOC from "react-table/lib/hoc/selectTable";
@@ -73,6 +73,7 @@ class ClubMembersList extends Component {
         licence_number: api_response.results[i].profile.licence_number,
         phone_number: api_response.results[i].profile.phone_number,
         teams: api_response.results[i].teams,
+        status: api_response.results[i].profile.status.slug_name,
       };
       members_data.push(new_member);
     }
@@ -180,7 +181,7 @@ class ClubMembersList extends Component {
   showTable(){
       try{
           // Get functions and checkbox props
-          const { toggleSelection, toggleAll, isSelected, logSelection } = this;
+          const { toggleSelection, toggleAll, isSelected } = this;
           const { selectAll } = this.state;
           const checkboxProps = {
             selectAll,
@@ -241,7 +242,7 @@ class ClubMembersList extends Component {
                                         {
                                             Header: 'Email',
                                             accessor: 'email',
-                                            width: 200,
+                                            width: 250,
                                             Cell: this.renderEditable,
                                             Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
                                         },
@@ -275,7 +276,6 @@ class ClubMembersList extends Component {
                                     ]
                                 },
                               ]}
-                              getTrProps={this.onRowClick}
               />
           )
       }
@@ -283,18 +283,6 @@ class ClubMembersList extends Component {
           console.log("No members_data!");
       }
   }
-
-    onRowClick = (state, rowInfo, column, instance) => {
-        return {
-            onClick: e => {
-                console.log('A Td Element was clicked!');
-                console.log('it produced this event:', e);
-                console.log('It was in this column:', column);
-                console.log('It was in this row:', rowInfo);
-                console.log('It was in this table instance:', instance);
-            }
-        }
-    };
 
   // Filter with only 1 choice
 
@@ -457,6 +445,7 @@ class ClubMembersList extends Component {
   }
 
   renderEditable(cellInfo) {
+      // If edition mode
       if(this.state.isEditionMode) {
           return (
               <div
@@ -474,16 +463,49 @@ class ClubMembersList extends Component {
               />
           );
       }
+      // If not edition mode
       else {
+          // If column === email
+          if(cellInfo.column.id === 'email'){
+              // If status === pending
+              if(this.state.members_data[cellInfo.index].status === 'pending') {
+                  const id = this.state.members_data[cellInfo.index].id;
+                  return (
+                      <div className="email_content">
+                          <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+                              {this.state.members_data[cellInfo.index][cellInfo.column.id]}
+                          </a>
+                          <div className="email_warning">
+                                Account not activated
+                          </div>
+
+                          <button className="email_relance">
+                              Relancer
+                          </button>
+                      </div>
+                  );
+              }
+              else if(this.state.members_data[cellInfo.index].status === 'not_invited'){
+                  return (
+                      <div className="email_warning">
+                          No email for this account
+                          <button className="email_invite">
+                              Invite
+                          </button>
+
+                      </div>
+                  );
+              }
+          }
+
+          // If column !== email
           const id = this.state.members_data[cellInfo.index].id;
           return (
               // Change URL to static URL
               <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
-                  <div
-                      dangerouslySetInnerHTML={{
-                          __html: this.state.members_data[cellInfo.index][cellInfo.column.id]
-                      }}
-                  />
+                  <div>
+                      {this.state.members_data[cellInfo.index][cellInfo.column.id]}
+                  </div>
               </a>
           );
       }

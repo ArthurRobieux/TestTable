@@ -107,3 +107,43 @@
   text-decoration: none;
   color: black;
 }
+
+.email_warning{
+  color: red;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.email_relance{
+  font-size: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  display: inline;
+  padding: 2px;
+  float: right;
+  background-color: #ececec;
+  opacity: 0.7;
+  position: relative;
+  bottom: 29px;
+  cursor: pointer;
+}
+
+.email_invite{
+  font-size: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  display: inline;
+  padding: 2px;
+  float: right;
+  background-color: #ececec;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.test{
+  background: red;
+}
+
+.email_invite:hover, .email_relance:hover{
+  opacity: 1;
+}
