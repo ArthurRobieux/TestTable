@@ -180,7 +180,7 @@ class ClubMembersList extends Component {
 
   // Show Table if there is data in the state.members_data
   showTable(){
-      try{
+      if(this.state.members_data.length !== 0){
           // Get functions and checkbox props
           const { toggleSelection, toggleAll, isSelected } = this;
           const { selectAll } = this.state;
@@ -281,23 +281,6 @@ class ClubMembersList extends Component {
               }
           }
 
-          // Get data and filter if general search
-          // let data = this.state.members_data;
-          //
-          // if (this.state.search) {
-          //     // For each row/member
-          //     data = data.filter(row => {
-          //         // For each column
-          //         for(var k=0; k<list_columns.length; k++){
-          //             // If search === column value
-          //             if(String(row[list_columns[k]]).toLowerCase().includes(this.state.search.toLowerCase())){
-          //                 return true
-          //             }
-          //         }
-          //         return false
-          //    });
-          // }
-
           let data = this.state.members_data;
 
           if (this.state.search) {
@@ -310,16 +293,18 @@ class ClubMembersList extends Component {
               });
           }
 
+          const page_size = this.state.members_data.length;
+
           return(
                 <CheckboxTable ref={r => (this.checkboxTable = r)} data={data} noDataText="Loading .."
-                             defaultPageSize={20} columns={columns}
+                             defaultPageSize={page_size} showPagination={false} columns={columns}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
               />
           )
       }
-      catch(error){
+      else{
           console.log("No members_data!");
       }
   }
@@ -545,7 +530,7 @@ class ClubMembersList extends Component {
                   const id = members_data[cellInfo.index].id;
                   return (
                       <div className="email_content">
-                          <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+                          <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
                               {members_data[cellInfo.index][cellInfo.column.id]}
                           </a>
                           <div className="email_warning">
@@ -553,19 +538,40 @@ class ClubMembersList extends Component {
                           </div>
 
                           <button className="email_reminder">
-                              Reminder
+                              <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id+"/reminder/"} className={"profile_ref"}>
+                                Reminder
+                              </a>
                           </button>
                       </div>
                   );
               }
+              // If no email
               else if(members_data[cellInfo.index].status === 'not_invited'){
                   return (
                       <div className="email_warning">
-                          No email for this account
                           <button className="email_invite">
                               Invite
                           </button>
+                      </div>
+                  );
+              }
+              // If email is invalid
+              else if(members_data[cellInfo.index].status === 'invalid'){
+                  const id = members_data[cellInfo.index].id;
+                  return (
+                      <div className="email_content">
+                          <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+                              {members_data[cellInfo.index][cellInfo.column.id]}
+                          </a>
+                          <div className="email_warning">
+                                Invalid email
+                          </div>
 
+                          <button className="email_correct">
+                              <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id+"/reminder/"} className={"profile_ref"}>
+                                Correct
+                              </a>
+                          </button>
                       </div>
                   );
               }
