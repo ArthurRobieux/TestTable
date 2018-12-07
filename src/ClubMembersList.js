@@ -342,7 +342,8 @@ class ClubMembersList extends Component {
       let options = [];
 
       for(var i=0; i<this.state.members_data.length; i++){
-            if(!options.includes(this.state.members_data[i][column_name])){
+            if(!options.includes(this.state.members_data[i][column_name])
+                && this.state.members_data[i][column_name] !== ''){
                 options.push(this.state.members_data[i][column_name]);
             }
       }
@@ -391,7 +392,8 @@ class ClubMembersList extends Component {
       // Get available options
       let options = [];
       for(var i=0; i<this.state.members_data.length; i++){
-            if(!options.includes(this.state.members_data[i][column_name])){
+            if(!options.includes(this.state.members_data[i][column_name])
+                && this.state.members_data[i][column_name] !== ''){
                 options.push(this.state.members_data[i][column_name]);
             }
       }
@@ -429,7 +431,8 @@ class ClubMembersList extends Component {
       let options = [];
 
       for(var i=0; i<this.state.members_data.length; i++){
-            if(!options.includes(this.state.members_data[i][column_name])){
+            if(!options.includes(this.state.members_data[i][column_name])
+                && this.state.members_data[i][column_name] !== ''){
                 options.push(this.state.members_data[i][column_name]);
             }
       }
@@ -569,6 +572,7 @@ class ClubMembersList extends Component {
           {/* Menu 2 */}
           <div id={"members_list_menu2"}>
 
+              <h3>Actions générales</h3>
               {/*Edition Mode*/}
               <button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>
               {/*Log Selection*/}
@@ -583,6 +587,8 @@ class ClubMembersList extends Component {
               </a>
               {/*Print members list*/}
               <button className={"action_button"}>Print</button>
+
+              <h3>Actions collectives</h3>
               {/*Affect players to a team*/}
               <button className={"action_button"}>Affect player to team</button>
               {/*Delete players from club*/}
