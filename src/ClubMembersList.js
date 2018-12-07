@@ -352,22 +352,28 @@ class ClubMembersList extends Component {
 
       // Create select options
       return(
-          <div id={"filters"}>
-              {/*Text filter*/}
-              <div id={"text_filter"}>
-                    <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                        placeholder={"Search.."}/><br/>
+          <div>
+
+              <button className={"action_button"} onClick={() => this.showHideFilters(column_name)}>Filter</button>
+
+              <div id={"filters_"+column_name} className={"filters"}>
+                  {/*Text filter*/}
+                  <div id={"text_filter"}>
+                        <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                            placeholder={"Search.."}/><br/>
+                  </div>
+                  <br/>
+                {/*Select filter  */}
+                <div id={"select_filter"}>
+                <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
+                    <option value='All'>All</option>
+                    {options.map(option => (
+                        <option value={option}>{option}</option>
+                    ))}
+                </select>
+                </div>
               </div>
-              <br/>
-            {/*Select filter  */}
-            <div id={"select_filter"}>
-            <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
-                <option value='All'>All</option>
-                {options.map(option => (
-                    <option value={option}>{option}</option>
-                ))}
-            </select>
-            </div>
+
           </div>
       );
   }
@@ -375,10 +381,14 @@ class ClubMembersList extends Component {
   // Get filter
   getTextFilter(filter, onChange, column_name){
       return(
-          <div id={"filters"}>
-              <div id={"text_filter"}>
-                <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                       placeholder={"Search.."}/>
+          <div>
+              <button className={"action_button"} onClick={() => this.showHideFilters(column_name)}>Filter</button>
+
+              <div id={"filters_"+column_name} className={"filters"}>
+                  <div id={"text_filter"}>
+                    <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                           placeholder={"Search.."}/>
+                  </div>
               </div>
           </div>
       );
@@ -441,28 +451,51 @@ class ClubMembersList extends Component {
 
       // Create a checkbox for each team
       return(
-          <div id={"filters"}>
-            {/*Text filter*/}
-            <div id={"text_filter"}>
-                <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                       placeholder={"Search.."}/>
+        <div>
+
+              <button className={"action_button"} onClick={() => this.showHideFilters(column_name)}>Filter</button>
+
+              <div id={"filters_"+column_name} className={"filters"}>
+                {/*Text filter*/}
+                <div id={"text_filter"}>
+                    <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                           placeholder={"Search.."}/>
+                </div>
+                <br/>
+                {/*Checkbox Filter*/}
+                <div id={"checkbox_filter"}>
+                    <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
+                    All
+                    {options.map(option => (
+                        <div>
+                            <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
+                            {option}
+                        </div>
+                    ))}
+                </div>
             </div>
-            <br/>
-            {/*Checkbox Filter*/}
-            <div id={"checkbox_filter"}>
-                <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
-                All
-                {options.map(option => (
-                    <div>
-                        <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
-                        {option}
-                    </div>
-                ))}
-            </div>
+
         </div>
 
       );
   }
+
+  showHideFilters(column_name){
+
+      const d = document.getElementById("filters_"+column_name);
+
+      if(d.style.opacity === '1'){
+          d.style.opacity = '0';
+          d.style.visibility = 'hidden';
+      }
+      else {
+          d.style.opacity = '1';
+          d.style.visibility = 'visible';
+      }
+  }
+
+
+
 
 
 
@@ -558,7 +591,7 @@ class ClubMembersList extends Component {
       const max_height = d.scrollHeight;
 
       if(d.style.height === String(max_height)+'px') {
-          d.style.height = '70px';
+          d.style.height = '65px';
       }
       else{
         d.style.height = String(max_height)+'px';

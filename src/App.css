@@ -146,10 +146,6 @@
   color: black;
 }
 
-.test{
-  background: red;
-}
-
 .rt-td:hover .email_invite, .rt-td:hover .email_reminder{
   opacity: 1;
 }
@@ -164,7 +160,7 @@
   background-color: #ececec;
   cursor: pointer;
   margin: 5px;
-  height: 30px;
+  height: 20px;
   background-image: none;
   text-shadow: none;
   opacity: 0.75;
@@ -189,7 +185,7 @@
 #members_list_menu1, #members_list_menu2{
   display: block;
   overflow: hidden;
-  height: 70px;
+  height: 65px;
   transition-duration: 1s;
   transition-timing-function: ease;
 }
@@ -215,4 +211,20 @@
 .hr_between_menu{
   width: 93%;
   display: inline-flex;
+}
+
+.ReactTable .rt-thead.-filters .rt-th {
+  height: 40px;
+  overflow: visible;
+}
+
+.filters{
+  opacity: 0;
+  visibility: hidden;
+  transition-duration: 0.3s;
+  background: white;
+  padding: 5px;
+  /*border: 1px solid black;*/
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px black;
 }
