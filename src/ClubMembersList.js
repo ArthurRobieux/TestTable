@@ -554,18 +554,11 @@ class ClubMembersList extends Component {
         <div>
 
           {/* Menu 1 */}
-          <div>
+          <div id={"members_list_menu1"}>
 
-              {/*Edition Mode*/}
-              <button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>
-              {/*Log Selection*/}
-              <button onClick={this.logSelection} className={"action_button"}>Log Selection</button>
-              {/*Export members list*/}
-              <button className={"action_button"}>Export</button>
-              {/*Print members list*/}
-              <button className={"action_button"}>Print</button>
-              {/*Add a member*/}
-              <button className={"action_button"}>Add a member</button>
+              {/*General Filter*/}
+              <input className={"action_filter"} type={"text"} placeholder={"Search.."}
+                     value={this.state.search} onChange={e => this.setState({search: e.target.value})}/>
 
               {this.showSelection()}
 
@@ -574,11 +567,22 @@ class ClubMembersList extends Component {
           <hr color="black" size="1"/>
 
           {/* Menu 2 */}
-          <div>
+          <div id={"members_list_menu2"}>
 
-              {/*General Filter*/}
-              <input className={"action_filter"} type={"text"} placeholder={"Search.."}
-                     value={this.state.search} onChange={e => this.setState({search: e.target.value})}/>
+              {/*Edition Mode*/}
+              <button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>
+              {/*Log Selection*/}
+              <button onClick={this.logSelection} className={"action_button"}>Log Selection</button>
+              {/*Export members list*/}
+              <a href={"http://no-team.local.sporteasy.net:8000/members/export/?season_id=18"}>
+                <button className={"action_button"}>Export</button>
+              </a>
+              {/*Add a member*/}
+              <a href={"http://no-team.local.sporteasy.net:8000/members/invite/"}>
+                <button className={"action_button"}>Add a member</button>
+              </a>
+              {/*Print members list*/}
+              <button className={"action_button"}>Print</button>
               {/*Affect players to a team*/}
               <button className={"action_button"}>Affect player to team</button>
               {/*Delete players from club*/}

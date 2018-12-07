@@ -127,6 +127,7 @@
   bottom: 29px;
   cursor: pointer;
   transition-duration: 0.3s;
+  background-image: none;
 }
 
 .email_invite{
@@ -140,6 +141,7 @@
   opacity: 0;
   cursor: pointer;
   transition-duration: 0.3s;
+  background-image: none;
 }
 
 .test{
@@ -178,4 +180,8 @@
   padding: 2px;
   background-color: #ececec;
   margin: 5px;
+}
+
+#members_list_menu1, #members_list_menu2{
+  display: inline-block;
 }
