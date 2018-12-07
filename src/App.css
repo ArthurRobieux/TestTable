@@ -159,6 +159,7 @@
   font-size: 12px;
   border: 1px solid lightgrey;
   border-radius: 2px;
+  padding: 6px ;
   display: inline;
   background-color: #ececec;
   cursor: pointer;
@@ -167,6 +168,7 @@
   background-image: none;
   text-shadow: none;
   opacity: 0.75;
+  line-height: 0;
 }
 
 .action_button:hover{
@@ -185,5 +187,32 @@
 }
 
 #members_list_menu1, #members_list_menu2{
-  display: inline-block;
+  display: block;
+  overflow: hidden;
+  height: 70px;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+}
+
+.show_hide_menu{
+  color: black;
+  font-size: 10px;
+  border: none;
+  display: inline;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 5px;
+  height: 20px;
+  background-image: none;
+  text-shadow: none;
+  opacity: 0.75;
+  padding: 6px;
+  line-height: 0;
+  width: 5%;
+  float: left;
+}
+
+.hr_between_menu{
+  width: 93%;
+  display: inline-flex;
 }

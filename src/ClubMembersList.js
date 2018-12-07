@@ -551,6 +551,20 @@ class ClubMembersList extends Component {
       }
   }
 
+  // Show or hide menu 1/2
+  showHideMenu(nb){
+      const id = "members_list_menu" + nb;
+      const d = document.getElementById(id);
+      const max_height = d.scrollHeight;
+
+      if(d.style.height === String(max_height)+'px') {
+          d.style.height = '70px';
+      }
+      else{
+        d.style.height = String(max_height)+'px';
+      }
+  }
+
   render() {
 
     return(
@@ -567,7 +581,8 @@ class ClubMembersList extends Component {
 
           </div>
 
-          <hr color="black" size="1"/>
+          <button onClick={() => this.showHideMenu(1)} className={"show_hide_menu"}>+</button>
+          <hr color="black" size="1" className={"hr_between_menu"}/>
 
           {/* Menu 2 */}
           <div id={"members_list_menu2"}>
@@ -598,7 +613,8 @@ class ClubMembersList extends Component {
 
           </div>
 
-          <hr color="black" size="1"/>
+          <button onClick={() => this.showHideMenu(2)} className={"show_hide_menu"}>+</button>
+          <hr color="black" size="1" className={"hr_between_menu"}/>
 
           {/* Table */}
           <div>
