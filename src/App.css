@@ -221,10 +221,17 @@
 .filters{
   opacity: 0;
   visibility: hidden;
-  transition-duration: 0.3s;
+  transition-duration: 0.2s;
   background: white;
   padding: 5px;
   /*border: 1px solid black;*/
   border-radius: 5px;
   box-shadow: 1px 1px 4px black;
+  position: relative;
+  bottom: 25px;
+}
+
+.show_hide_filters:hover + .filters, .filters:hover{
+  opacity: 1;
+  visibility: visible;
 }

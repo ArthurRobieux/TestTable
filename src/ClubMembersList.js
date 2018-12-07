@@ -354,7 +354,7 @@ class ClubMembersList extends Component {
       return(
           <div>
 
-              <button className={"action_button"} onClick={() => this.showHideFilters(column_name)}>Filter</button>
+              <button className={"action_button show_hide_filters"}>Filter</button>
 
               <div id={"filters_"+column_name} className={"filters"}>
                   {/*Text filter*/}
@@ -382,7 +382,7 @@ class ClubMembersList extends Component {
   getTextFilter(filter, onChange, column_name){
       return(
           <div>
-              <button className={"action_button"} onClick={() => this.showHideFilters(column_name)}>Filter</button>
+              <button className={"action_button show_hide_filters"}>Filter</button>
 
               <div id={"filters_"+column_name} className={"filters"}>
                   <div id={"text_filter"}>
@@ -453,7 +453,7 @@ class ClubMembersList extends Component {
       return(
         <div>
 
-              <button className={"action_button"} onClick={() => this.showHideFilters(column_name)}>Filter</button>
+              <button className={"action_button show_hide_filters"}>Filter</button>
 
               <div id={"filters_"+column_name} className={"filters"}>
                 {/*Text filter*/}
