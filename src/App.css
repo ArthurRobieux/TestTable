@@ -119,15 +119,16 @@
   border: 1px solid lightgrey;
   border-radius: 2px;
   display: inline;
-  padding: 2px;
   float: right;
   background-color: #ececec;
   opacity: 0;
   position: relative;
-  bottom: 29px;
+  bottom: 25px;
+  height: 25px;
   cursor: pointer;
   transition-duration: 0.3s;
   background-image: none;
+  color: black;
 }
 
 .email_invite{
@@ -135,13 +136,14 @@
   border: 1px solid lightgrey;
   border-radius: 2px;
   display: inline;
-  padding: 2px;
   float: right;
   background-color: #ececec;
   opacity: 0;
   cursor: pointer;
+  height: 25px;
   transition-duration: 0.3s;
   background-image: none;
+  color: black;
 }
 
 .test{
