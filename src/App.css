@@ -148,7 +148,7 @@
   background: red;
 }
 
-.email_invite:hover, .email_reminder:hover{
+.rt-td:hover .email_invite, .rt-td:hover .email_reminder{
   opacity: 1;
 }
 
