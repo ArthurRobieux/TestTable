@@ -75,9 +75,11 @@ class ClubMembersList extends Component {
         phone_number: api_response.results[i].profile.phone_number,
         teams: api_response.results[i].teams,
         status: api_response.results[i].profile.status.slug_name,
+        parents: api_response.results[i].profile.parents,
       };
       members_data.push(new_member);
     }
+    console.log(members_data);
     this.setState({members_data: getData(members_data)});
   }
 
@@ -178,6 +180,35 @@ class ClubMembersList extends Component {
     console.log(this.state.isEditionMode)
   };
 
+
+  // Show parent name
+  showParentName(parents, parent_nb){
+      if(parents.value.length >= parent_nb) {
+          return (
+              <div>{parents.value[parent_nb-1].first_name} {parents.value[parent_nb-1].last_name}</div>
+          );
+      }
+  }
+
+  // Show parent email
+  showParentEmail(parents, parent_nb){
+      if(parents.value.length >= parent_nb) {
+          return (
+              <div>{parents.value[parent_nb-1].email}</div>
+          );
+      }
+  }
+
+  // Show parent phone
+  showParentPhone(parents, parent_nb){
+      if(parents.value.length >= parent_nb) {
+          return (
+              <div>{parents.value[parent_nb-1].phone_number}</div>
+          );
+      }
+  }
+
+
   // Show Table if there is data in the state.members_data
   showTable(){
       if(this.state.members_data.length !== 0){
@@ -273,6 +304,47 @@ class ClubMembersList extends Component {
                             },
                         ];
 
+          // Calcul max number of parents
+          let max_parents = 0;
+
+          for(var p=0; p<this.state.members_data.length; p++){
+              if(this.state.members_data[p].parents.length > max_parents){
+                  max_parents = this.state.members_data[p].parents.length;
+              }
+          }
+
+          // Create parents columns
+          for(let x=0; x<max_parents; x++){
+              let parent_column = {
+                                Header: "Parent " + parseInt(x+1),
+                                columns: [
+                                    {
+                                        Header: 'Name',
+                                        accessor: 'parents',
+                                        width: 150,
+                                        filterable: false,
+                                        Cell: parents => (this.showParentName(parents, x+1)),
+                                    },
+                                    {
+                                        Header: 'Email',
+                                        accessor: 'parents',
+                                        width: 150,
+                                        filterable: false,
+                                        Cell: parents => (this.showParentEmail(parents, x+1)),
+                                    },
+                                    {
+                                        Header: 'Phone',
+                                        accessor: 'parents',
+                                        width: 150,
+                                        filterable: false,
+                                        Cell: parents => (this.showParentPhone(parents, x+1)),
+                                    },
+                                ]
+                            };
+                            columns.push(parent_column);
+          }
+
+          // Get list of columns
           let list_columns = [];
 
           for(var i=0; i<columns.length; i++){
@@ -281,6 +353,7 @@ class ClubMembersList extends Component {
               }
           }
 
+          // Filter data with global search bar
           let data = this.state.members_data;
 
           if (this.state.search) {

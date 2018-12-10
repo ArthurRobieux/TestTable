@@ -203,7 +203,7 @@
   display: block;
   overflow: hidden;
   height: 65px;
-  transition-duration: 1s;
+  transition-duration: 0.1s;
   transition-timing-function: ease;
 }
 
