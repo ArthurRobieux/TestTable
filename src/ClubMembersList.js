@@ -36,6 +36,7 @@ class ClubMembersList extends Component {
       members_data: [],
       isEditionMode: false,
       search: '',
+      columns_name: [],
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
@@ -59,6 +60,10 @@ class ClubMembersList extends Component {
 
   // For each member in the API response, we will create a member and add him to state.members_data
   createDataFromJson(api_response){
+
+    let columns_name = api_response.config.headers;
+    this.setState({columns_name: columns_name});
+    console.log(this.state.columns_name);
 
     let members_data = [];
 
@@ -264,7 +269,7 @@ class ClubMembersList extends Component {
                                 fixed: "left",
                                 columns: [
                                     {
-                                        Header: '+',
+                                        Header: '',
                                         accessor: 'id',
                                         width: 75,
                                         filterable: false,
@@ -282,22 +287,8 @@ class ClubMembersList extends Component {
                                     },
                                     {
                                         Header: () => (
-                                          <div>
-                                            First Name
-                                            <button className={"show_hide_filters"}
-                                                    onClick={() => {this.showHideFilters("first_name"); return false}}>+</button>
-                                          </div>
-                                        ),
-                                        accessor: "first_name",
-                                        width: 150,
-                                        Cell: this.renderEditable,
-                                        filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
-                                        Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
-                                    },
-                                    {
-                                        Header: () => (
                                           <span>
-                                            Last Name
+                                            {this.state.columns_name[0].localized_name}
                                             <button className={"show_hide_filters"}
                                                     onClick={() => this.showHideFilters("last_name")}>+</button>
                                           </span>
@@ -308,6 +299,20 @@ class ClubMembersList extends Component {
                                         filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
                                         Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
                                     },
+                                    {
+                                        Header: () => (
+                                          <div>
+                                              {this.state.columns_name[1].localized_name}
+                                            <button className={"show_hide_filters"}
+                                                    onClick={() => {this.showHideFilters("first_name"); return false}}>+</button>
+                                          </div>
+                                        ),
+                                        accessor: "first_name",
+                                        width: 150,
+                                        Cell: this.renderEditable,
+                                        filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
+                                        Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
+                                    },
                                 ]
                             },
                             {
@@ -316,7 +321,7 @@ class ClubMembersList extends Component {
                                     {
                                         Header: () => (
                                           <span>
-                                            Email
+                                            {this.state.columns_name[2].localized_name}
                                             <button className={"show_hide_filters"}
                                                     onClick={() => this.showHideFilters("email")}>+</button>
                                           </span>
@@ -329,7 +334,7 @@ class ClubMembersList extends Component {
                                     {
                                         Header: () => (
                                           <span>
-                                            Teams
+                                            {this.state.columns_name[17].localized_name}
                                             <button className={"show_hide_filters"}
                                                     onClick={() => this.showHideFilters("teams")}>+</button>
                                           </span>
@@ -341,20 +346,20 @@ class ClubMembersList extends Component {
                                         Filter: ({ filter, onChange }) => this.getCheckboxFilter(filter, onChange, 'teams'),
                                     },
                                     {
-                                        Header: 'Telephone',
+                                        Header: this.state.columns_name[15].localized_name,
                                         accessor: 'phone_number',
                                         width: 150,
                                         filterable: false,
                                         Cell: this.renderEditable,
                                     },
                                     {
-                                        Header: 'Taille',
+                                        Header: this.state.columns_name[18].localized_name,
                                         accessor: 'height',
                                         width: 100,
                                         filterable: false,
                                     },
                                     {
-                                        Header: 'Poids',
+                                        Header: this.state.columns_name[19].localized_name,
                                         accessor: 'weight',
                                         width: 100,
                                         filterable: false,
@@ -378,21 +383,21 @@ class ClubMembersList extends Component {
                                 Header: "Parent " + parseInt(x+1),
                                 columns: [
                                     {
-                                        Header: 'Name',
+                                        Header: this.state.columns_name[0].localized_name,
                                         accessor: 'parents',
                                         width: 150,
                                         filterable: false,
                                         Cell: parents => (this.showParentName(parents, x+1)),
                                     },
                                     {
-                                        Header: 'Email',
+                                        Header: this.state.columns_name[2].localized_name,
                                         accessor: 'parents',
                                         width: 150,
                                         filterable: false,
                                         Cell: parents => (this.showParentEmail(parents, x+1)),
                                     },
                                     {
-                                        Header: 'Phone',
+                                        Header: this.state.columns_name[15].localized_name,
                                         accessor: 'parents',
                                         width: 150,
                                         filterable: false,
