@@ -5,8 +5,24 @@ import './index.css';
 import TeamMembersList from './TeamMembersList';
 import ClubMembersList from './ClubMembersList';
 
-const team_id = window.team_id;
-const club_id = window.club_id;
+const root = document.getElementById("react-club_members_table");
+
+const team_id = root.dataset.team_id;
+const club_id = root.dataset.club_id;
+
+let translations = {};
+
+translations['parent'] = root.dataset.parent;
+translations['account_not_activated'] = root.dataset.account_not_activated;
+translations['invalid_email'] = root.dataset.invalid_email;
+translations['reminder'] = root.dataset.reminder;
+translations['search'] = root.dataset.search;
+translations['add_a_member'] = root.dataset.add_a_member;
+translations['export'] = root.dataset.export;
+translations['affect_to_team'] = root.dataset.affect_to_team;
+translations['delete_from_club'] = root.dataset.delete_from_club;
+translations['profile'] = root.dataset.profile;
+translations['infos'] = root.dataset.infos;
 
 
 class MembersListApp extends React.Component {
@@ -19,7 +35,7 @@ class MembersListApp extends React.Component {
         }
         else if(club_id !== undefined){
             return (
-                <ClubMembersList club_id={club_id}/>
+                <ClubMembersList club_id={club_id} translations={translations}/>
             )
         }
     }
@@ -29,5 +45,5 @@ class MembersListApp extends React.Component {
 
 ReactDOM.render(
   <MembersListApp/>,
-  document.getElementById('root')
+  document.getElementById('react-club_members_table')
 );

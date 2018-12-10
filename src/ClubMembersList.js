@@ -265,7 +265,7 @@ class ClubMembersList extends Component {
           // Define columns
           let columns = [
                             {
-                                Header: "Profile",
+                                Header: this.props.translations.profile,
                                 fixed: "left",
                                 columns: [
                                     {
@@ -316,7 +316,7 @@ class ClubMembersList extends Component {
                                 ]
                             },
                             {
-                                Header: "Infos",
+                                Header: this.props.translations.infos,
                                 columns: [
                                     {
                                         Header: () => (
@@ -380,7 +380,7 @@ class ClubMembersList extends Component {
           // Create parents columns
           for(let x=0; x<max_parents; x++){
               let parent_column = {
-                                Header: "Parent " + parseInt(x+1),
+                                Header: this.props.translations.parent + " " + parseInt(x+1),
                                 columns: [
                                     {
                                         Header: this.state.columns_name[0].localized_name,
@@ -480,7 +480,7 @@ class ClubMembersList extends Component {
                   {/*Text filter*/}
                   <div id={"text_filter"}>
                         <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                            placeholder={"Search.."}/><br/>
+                            placeholder={this.props.translations.search + ".."}/><br/>
                   </div>
                   <br/>
                 {/*Select filter  */}
@@ -505,7 +505,7 @@ class ClubMembersList extends Component {
               <div id={"filters_"+column_name} className={"filters"}>
                   <div id={"text_filter"}>
                     <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                           placeholder={"Search.."}/>
+                           placeholder={this.props.translations.search + ".."}/>
                   </div>
               </div>
           </div>
@@ -575,7 +575,7 @@ class ClubMembersList extends Component {
                 {/*Text filter*/}
                 <div id={"text_filter"}>
                     <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                           placeholder={"Search.."}/>
+                           placeholder={this.props.translations.search + ".."}/>
                 </div>
                 <br/>
                 {/*Checkbox Filter*/}
@@ -667,12 +667,12 @@ class ClubMembersList extends Component {
                               {members_data[cellInfo.index][cellInfo.column.id]}
                           </a>
                           <div className="email_warning">
-                                Account not activated
+                                {this.props.translations.account_not_activated}
                           </div>
 
                           <button className="email_reminder">
                               <a href={"/profile/"+id+"/reminder/"} className={"profile_ref js-popin-form"}>
-                                Reminder
+                                {this.props.translations.reminder}
                               </a>
                           </button>
                       </div>
@@ -697,7 +697,7 @@ class ClubMembersList extends Component {
                               {members_data[cellInfo.index][cellInfo.column.id]}
                           </a>
                           <div className="email_warning">
-                                Invalid email
+                              {this.props.translations.invalid_email}
                           </div>
 
                           <button className="email_correct">
@@ -746,7 +746,7 @@ class ClubMembersList extends Component {
           <div id={"members_list_menu1"}>
 
               {/*General Filter*/}
-              <input className={"action_filter"} type={"text"} placeholder={"Search.."}
+              <input className={"action_filter"} type={"text"} placeholder={this.props.translations.search + ".."}
                      value={this.state.search} onChange={e => this.setState({search: e.target.value})}/>
 
               {this.showSelection()}
@@ -759,29 +759,29 @@ class ClubMembersList extends Component {
           {/* Menu 2 */}
           <div id={"members_list_menu2"}>
 
-              <h3>Actions générales</h3>
+              <h4>Actions générales</h4>
               {/*Edition Mode*/}
-              <button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>
+              {/*<button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>*/}
               {/*Log Selection*/}
-              <button onClick={this.logSelection} className={"action_button"}>Log Selection</button>
-              {/*Export members list*/}
-              <a href={"/members/export/?season_id=18"}>
-                <button className={"action_button"}>Export</button>
-              </a>
+              {/*<button onClick={this.logSelection} className={"action_button"}>Log Selection</button>*/}
+
               {/*Add a member*/}
               <a href={"/members/invite/"}>
-                <button className={"action_button"}>Add a member</button>
+                <button className={"action_button"}>{this.props.translations.add_a_member}</button>
               </a>
-              {/*Print members list*/}
-              <button className={"action_button"}>Print</button>
+              {/*Export members list*/}
+              <a href={"/members/export/?season_id=18"}>
+                <button className={"action_button"}>{this.props.translations.export}</button>
+              </a>
 
-              <h3>Actions collectives</h3>
+
+              <h4>Actions collectives</h4>
               {/*Affect players to a team*/}
-              <button className={"action_button"}>Affect player to team</button>
+              <button className={"action_button"}>{this.props.translations.affect_to_team}</button>
               {/*Delete players from club*/}
-              <button className={"action_button"}>Delete player from club</button>
+              <button className={"action_button"}>{this.props.translations.delete_from_club}</button>
               {/*Send a global message*/}
-              <button className={"action_button"}>Send a message</button>
+              {/*<button className={"action_button"}>Send a message</button>*/}
 
           </div>
 
