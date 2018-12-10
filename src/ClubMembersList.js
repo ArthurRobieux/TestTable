@@ -290,7 +290,9 @@ class ClubMembersList extends Component {
                                           <span>
                                             {this.state.columns_name[0].localized_name}
                                             <button className={"show_hide_filters"}
-                                                    onClick={() => this.showHideFilters("last_name")}>+</button>
+                                                    onClick={() => this.showHideFilters("last_name")}>
+                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
+                                            </button>
                                           </span>
                                         ),
                                         accessor: "last_name",
@@ -304,7 +306,9 @@ class ClubMembersList extends Component {
                                           <div>
                                               {this.state.columns_name[1].localized_name}
                                             <button className={"show_hide_filters"}
-                                                    onClick={() => {this.showHideFilters("first_name"); return false}}>+</button>
+                                                    onClick={() => {this.showHideFilters("first_name"); return false}}>
+                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
+                                            </button>
                                           </div>
                                         ),
                                         accessor: "first_name",
@@ -323,7 +327,9 @@ class ClubMembersList extends Component {
                                           <span>
                                             {this.state.columns_name[2].localized_name}
                                             <button className={"show_hide_filters"}
-                                                    onClick={() => this.showHideFilters("email")}>+</button>
+                                                    onClick={() => this.showHideFilters("email")}>
+                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
+                                            </button>
                                           </span>
                                         ),
                                         accessor: 'email',
@@ -336,7 +342,9 @@ class ClubMembersList extends Component {
                                           <span>
                                             {this.state.columns_name[17].localized_name}
                                             <button className={"show_hide_filters"}
-                                                    onClick={() => this.showHideFilters("teams")}>+</button>
+                                                    onClick={() => this.showHideFilters("teams")}>
+                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
+                                            </button>
                                           </span>
                                         ),
                                         accessor: 'teams',

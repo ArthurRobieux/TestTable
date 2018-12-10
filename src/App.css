@@ -273,8 +273,6 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  position: relative;
-  bottom: 1px;
 
   background-image: none;
   text-shadow: none;
@@ -283,4 +281,8 @@
 
 .members_options{
   display: block;
+}
+
+.icon_search{
+  width: 13px;
 }
