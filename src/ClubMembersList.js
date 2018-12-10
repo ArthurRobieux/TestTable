@@ -102,7 +102,6 @@ class ClubMembersList extends Component {
         d.style.height = "30%";
         this.setState({popup_content: popup_content});
     }
-    console.log(this.state);
   }
 
   // Add/delete lines to state.selection
@@ -208,6 +207,41 @@ class ClubMembersList extends Component {
       }
   }
 
+  // Show personnal member option
+  showMemberOptions(id){
+    let d = document.getElementById("member_"+id+"_options");
+
+    if(d.style.display === "block") {
+        d.style.display = "none";
+    }
+    else{
+        d.style.display = "block";
+    }
+  }
+
+  memberOptions(id){
+      return(
+          <div>
+
+              {/*<button onClick={() => this.showMemberOptions(id)}> </button>*/}
+
+              <div id={"member_"+id+"_options"} className={"members_options"}>
+                    <a className={"profile_ref js-popin-form"}
+                        href={"/members/board/" + id + "/update/" }>
+                            Up
+                    </a>
+
+                    /
+
+                    <a className={"profile_ref js-popin-form"}
+                        href={"/profile/parents/" + id + "/create/roster/" }>
+                            Ap
+                    </a>
+              </div>
+
+          </div>
+      )
+  }
 
   // Show Table if there is data in the state.members_data
   showTable(){
@@ -230,6 +264,13 @@ class ClubMembersList extends Component {
                                 fixed: "left",
                                 columns: [
                                     {
+                                        Header: '+',
+                                        accessor: 'id',
+                                        width: 75,
+                                        filterable: false,
+                                        Cell: id => (this.memberOptions(id.value)),
+                                    },
+                                    {
                                         Header: '',
                                         accessor: 'avatar',
                                         width: 40,
@@ -238,12 +279,6 @@ class ClubMembersList extends Component {
                                                                alt={profile.value.avatar["120x120"]}
                                                                className={"avatar"}
                                                                onClick={() => this.showPopUp(profile.value)}/>),
-                                    },
-                                    {
-                                        Header: 'Id',
-                                        accessor: 'id',
-                                        width: 50,
-                                        filterable: false,
                                     },
                                     {
                                         Header: () => (
@@ -623,7 +658,7 @@ class ClubMembersList extends Component {
                   const id = members_data[cellInfo.index].id;
                   return (
                       <div className="email_content">
-                          <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+                          <a href={"/profile/"+id} className={"profile_ref"}>
                               {members_data[cellInfo.index][cellInfo.column.id]}
                           </a>
                           <div className="email_warning">
@@ -631,7 +666,7 @@ class ClubMembersList extends Component {
                           </div>
 
                           <button className="email_reminder">
-                              <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id+"/reminder/"} className={"profile_ref"}>
+                              <a href={"/profile/"+id+"/reminder/"} className={"profile_ref js-popin-form"}>
                                 Reminder
                               </a>
                           </button>
@@ -653,7 +688,7 @@ class ClubMembersList extends Component {
                   const id = members_data[cellInfo.index].id;
                   return (
                       <div className="email_content">
-                          <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+                          <a href={"/profile/"+id} className={"profile_ref"}>
                               {members_data[cellInfo.index][cellInfo.column.id]}
                           </a>
                           <div className="email_warning">
@@ -661,7 +696,7 @@ class ClubMembersList extends Component {
                           </div>
 
                           <button className="email_correct">
-                              <a href={"http://no-team.local.sporteasy.net:8000/profile/"+id+"/reminder/"} className={"profile_ref"}>
+                              <a href={"/profile/"+id+"/reminder/"} className={"profile_ref"}>
                                 Correct
                               </a>
                           </button>
@@ -674,7 +709,7 @@ class ClubMembersList extends Component {
           const id = members_data[cellInfo.index].id;
           return (
               // Change URL to static URL
-              <a href={"http://no-team-noteam.local.sporteasy.net:8000/profile/"+id} className={"profile_ref"}>
+              <a href={"/profile/"+id} className={"profile_ref"}>
                   <div>
                       {members_data[cellInfo.index][cellInfo.column.id]}
                   </div>
@@ -725,11 +760,11 @@ class ClubMembersList extends Component {
               {/*Log Selection*/}
               <button onClick={this.logSelection} className={"action_button"}>Log Selection</button>
               {/*Export members list*/}
-              <a href={"http://no-team.local.sporteasy.net:8000/members/export/?season_id=18"}>
+              <a href={"/members/export/?season_id=18"}>
                 <button className={"action_button"}>Export</button>
               </a>
               {/*Add a member*/}
-              <a href={"http://no-team.local.sporteasy.net:8000/members/invite/"}>
+              <a href={"/members/invite/"}>
                 <button className={"action_button"}>Add a member</button>
               </a>
               {/*Print members list*/}

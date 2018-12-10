@@ -280,3 +280,7 @@
   text-shadow: none;
   line-height: 0;
 }
+
+.members_options{
+  display: block;
+}
