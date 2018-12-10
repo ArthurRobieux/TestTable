@@ -92,6 +92,9 @@
 .rt-table::-webkit-scrollbar-thumb {
   background: #bbbbbb;
 }
+.rt-table::-webkit-scrollbar-thumb:hover {
+  background: #aaaaaa;
+}
 
 
 #text_filter{
@@ -246,25 +249,34 @@
   display: inline-flex;
 }
 
+.ReactTable .rt-thead.-filters {
+  height: 0;
+}
+
 .ReactTable .rt-thead.-filters .rt-th {
-  height: 40px;
   overflow: visible;
 }
 
 .filters{
   opacity: 0;
-  visibility: hidden;
+  display: none;
   transition-duration: 0.2s;
   background: white;
   padding: 5px;
   /*border: 1px solid black;*/
   border-radius: 5px;
   box-shadow: 1px 1px 4px black;
-  position: relative;
-  bottom: 25px;
 }
 
-.show_hide_filters:hover + .filters, .filters:hover{
-  opacity: 1;
-  visibility: visible;
+.show_hide_filters {
+  color: black;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  bottom: 1px;
+
+  background-image: none;
+  text-shadow: none;
+  line-height: 0;
 }

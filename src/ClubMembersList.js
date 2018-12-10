@@ -246,7 +246,13 @@ class ClubMembersList extends Component {
                                         filterable: false,
                                     },
                                     {
-                                        Header: "First Name",
+                                        Header: () => (
+                                          <div>
+                                            First Name
+                                            <button className={"show_hide_filters"}
+                                                    onClick={() => {this.showHideFilters("first_name"); return false}}>+</button>
+                                          </div>
+                                        ),
                                         accessor: "first_name",
                                         width: 150,
                                         Cell: this.renderEditable,
@@ -254,7 +260,13 @@ class ClubMembersList extends Component {
                                         Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
                                     },
                                     {
-                                        Header: "Last Name",
+                                        Header: () => (
+                                          <span>
+                                            Last Name
+                                            <button className={"show_hide_filters"}
+                                                    onClick={() => this.showHideFilters("last_name")}>+</button>
+                                          </span>
+                                        ),
                                         accessor: "last_name",
                                         width: 150,
                                         Cell: this.renderEditable,
@@ -267,14 +279,26 @@ class ClubMembersList extends Component {
                                 Header: "Infos",
                                 columns: [
                                     {
-                                        Header: 'Email',
+                                        Header: () => (
+                                          <span>
+                                            Email
+                                            <button className={"show_hide_filters"}
+                                                    onClick={() => this.showHideFilters("email")}>+</button>
+                                          </span>
+                                        ),
                                         accessor: 'email',
                                         width: 250,
                                         Cell: this.renderEditable,
                                         Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
                                     },
                                     {
-                                        Header: 'Teams',
+                                        Header: () => (
+                                          <span>
+                                            Teams
+                                            <button className={"show_hide_filters"}
+                                                    onClick={() => this.showHideFilters("teams")}>+</button>
+                                          </span>
+                                        ),
                                         accessor: 'teams',
                                         width: 175,
                                         Cell: this.renderEditable,
@@ -370,7 +394,7 @@ class ClubMembersList extends Component {
 
           return(
                 <CheckboxTable ref={r => (this.checkboxTable = r)} data={data} noDataText="Loading .."
-                             defaultPageSize={page_size} showPagination={false} columns={columns}
+                             defaultPageSize={20} showPagination={true} columns={columns}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
@@ -412,8 +436,6 @@ class ClubMembersList extends Component {
       return(
           <div>
 
-              <button className={"action_button show_hide_filters"}>Filter</button>
-
               <div id={"filters_"+column_name} className={"filters"}>
                   {/*Text filter*/}
                   <div id={"text_filter"}>
@@ -440,8 +462,6 @@ class ClubMembersList extends Component {
   getTextFilter(filter, onChange, column_name){
       return(
           <div>
-              <button className={"action_button show_hide_filters"}>Filter</button>
-
               <div id={"filters_"+column_name} className={"filters"}>
                   <div id={"text_filter"}>
                     <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
@@ -511,8 +531,6 @@ class ClubMembersList extends Component {
       return(
         <div>
 
-              <button className={"action_button show_hide_filters"}>Filter</button>
-
               <div id={"filters_"+column_name} className={"filters"}>
                 {/*Text filter*/}
                 <div id={"text_filter"}>
@@ -544,12 +562,14 @@ class ClubMembersList extends Component {
 
       if(d.style.opacity === '1'){
           d.style.opacity = '0';
-          d.style.visibility = 'hidden';
+          d.style.display = 'none';
       }
       else {
           d.style.opacity = '1';
-          d.style.visibility = 'visible';
+          d.style.display = 'block';
       }
+
+      return false;
   }
 
 
