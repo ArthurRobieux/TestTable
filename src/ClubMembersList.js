@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 import ReactTable from "react-table";
-import ReactTableDefaults from "react-table";
 import 'react-table/react-table.css'
 import Popup from 'reactjs-popup'
 
@@ -39,6 +38,8 @@ class ClubMembersList extends Component {
       isEditionMode: false,
       search: '',
       columns_name: [],
+      teams_options: [],
+      columns: [],
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
@@ -114,6 +115,196 @@ class ClubMembersList extends Component {
     }
     console.log(members_data);
     this.setState({members_data: getData(members_data)});
+    this.getTeamsOptions();
+    this.getColumns();
+  }
+
+  // Get in state all the possible choice for teams
+  getTeamsOptions(){
+      // Get available options
+      let options = [];
+
+      // For each member
+      for (var i = 0; i < this.state.members_data.length; i++) {
+          // For each team
+          for (var j = 0; j < this.state.members_data.length; j++) {
+              if (!options.includes(this.state.members_data[i]['teams'][j])
+                  && this.state.members_data[i]['teams'][j] !== undefined) {
+                  options.push(this.state.members_data[i]['teams'][j]);
+              }
+          }
+      }
+      this.setState({teams_options:options});
+  }
+
+  // Create table columns
+  getColumns(){
+
+      // Define columns
+      let columns = [
+                        {
+                            Header: this.props.translations.profile,
+                            fixed: "left",
+                            columns: [
+                                {
+                                    Header: '',
+                                    accessor: 'id',
+                                    width: 40,
+                                    filterable: false,
+                                    Cell: id => (this.memberOptions(id.value)),
+                                },
+                                {
+                                    Header: '',
+                                    accessor: 'avatar',
+                                    width: 40,
+                                    filterable: false,
+                                    Cell: profile => (<img src={profile.value.avatar["120x120"]}
+                                                           alt={profile.value.avatar["120x120"]}
+                                                           className={"avatar"}
+                                                           onClick={() => this.showPopUp(profile.value)}/>),
+                                },
+                                {
+                                    Header: () => (<span>{this.state.columns_name[0].localized_name}</span>),
+                                    accessor: "last_name",
+                                    width: 150,
+                                    Cell: this.renderEditable,
+                                    filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
+                                    Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
+                                },
+                                {
+                                    Header: () => (<div>{this.state.columns_name[1].localized_name}</div>),
+                                    accessor: "first_name",
+                                    width: 150,
+                                    Cell: this.renderEditable,
+                                    filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
+                                    Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
+                                },
+                            ]
+                        },
+                        {
+                            Header: this.props.translations.infos,
+                            columns: [
+                                {
+                                    Header: () => (<span>{this.state.columns_name[2].localized_name}</span>),
+                                    accessor: 'email',
+                                    width: 250,
+                                    Cell: this.renderEditable,
+                                    Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
+                                },
+                                {
+                                    Header: () => (<span>{this.state.columns_name[17].localized_name}</span>),
+                                    accessor: 'teams',
+                                    width: 175,
+                                    Cell: this.renderEditable,
+                                    filterMethod: (filter, row) => this.getCheckboxTeamsFilterMethod(filter, row, 'teams'),
+                                    Filter: ({ filter, onChange }) => this.getCheckboxTeamsFilter(filter, onChange, 'teams'),
+                                },
+                                {
+                                    Header: this.state.columns_name[15].localized_name,
+                                    accessor: 'phone_number',
+                                    width: 150,
+                                    filterable: false,
+                                    Cell: this.renderEditable,
+                                },
+                                {
+                                    Header: this.state.columns_name[18].localized_name,
+                                    accessor: 'height',
+                                    width: 100,
+                                    filterable: false,
+                                },
+                                {
+                                    Header: this.state.columns_name[19].localized_name,
+                                    accessor: 'weight',
+                                    width: 100,
+                                    filterable: false,
+                                },
+                            ]
+                        },
+                    ];
+
+      // Calcul max number of parents
+      let max_parents = 0;
+
+      for(var p=0; p<this.state.members_data.length; p++){
+          if(this.state.members_data[p].parents.length > max_parents){
+              max_parents = this.state.members_data[p].parents.length;
+          }
+      }
+
+      // Create parents columns
+      for(let x=0; x<max_parents; x++){
+          let parent_column = {
+                            Header: this.props.translations.parent + " " + parseInt(x+1),
+                            columns: [
+                                {
+                                    Header: this.state.columns_name[0].localized_name,
+                                    accessor: 'parents',
+                                    width: 150,
+                                    filterable: false,
+                                    Cell: parents => (this.showParentName(parents, x+1)),
+                                },
+                                {
+                                    Header: this.state.columns_name[2].localized_name,
+                                    accessor: 'parents',
+                                    width: 150,
+                                    filterable: false,
+                                    Cell: parents => (this.showParentEmail(parents, x+1)),
+                                },
+                                {
+                                    Header: this.state.columns_name[15].localized_name,
+                                    accessor: 'parents',
+                                    width: 150,
+                                    filterable: false,
+                                    Cell: parents => (this.showParentPhone(parents, x+1)),
+                                },
+                            ]
+                        };
+                        columns.push(parent_column);
+      }
+      this.setState({columns:columns});
+  }
+
+  // Show Table if there is data in the state.members_data
+  showTable(){
+      if(this.state.members_data.length !== 0){
+          // Get functions and checkbox props
+          const { toggleSelection, toggleAll, isSelected } = this;
+          const { selectAll } = this.state;
+          const checkboxProps = {
+            selectAll,
+            isSelected,
+            toggleSelection,
+            toggleAll,
+            selectType: "checkbox",
+          };
+
+          // Filter data with global search bar
+          let data = this.state.members_data;
+
+          if (this.state.search) {
+              data = data.filter(row => {
+                return String(row['first_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['last_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['email']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['teams']).toLowerCase().includes(this.state.search.toLowerCase()) ||
+                       String(row['phone_number']).toLowerCase().includes(this.state.search.toLowerCase())
+              });
+          }
+
+          // const page_size = this.state.members_data.length;
+
+          return(
+                <CheckboxTable ref={r => (this.checkboxTable = r)} data={data} noDataText="Loading .."
+                             defaultPageSize={20} showPagination={true} columns={this.state.columns}
+                             className="-striped -highlight react_table" filterable {...checkboxProps}
+                             defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
+                             ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
+              />
+          )
+      }
+      else{
+          console.log("No members_data!");
+      }
   }
 
   // Onclick, show or hide pop-up, by giving him data
@@ -249,7 +440,7 @@ class ClubMembersList extends Component {
               <div id={"member_"+id+"_options"} className={"members_options"}>
 
                   <Popup
-                    trigger={<button className="button"> + </button>}
+                    trigger={<button className="settings_button"> + </button>}
                     closeOnDocumentClick
                     position={"right center"}
                   >
@@ -290,212 +481,6 @@ class ClubMembersList extends Component {
       )
   }
 
-  // Show Table if there is data in the state.members_data
-  showTable(){
-      if(this.state.members_data.length !== 0){
-          // Get functions and checkbox props
-          const { toggleSelection, toggleAll, isSelected } = this;
-          const { selectAll } = this.state;
-          const checkboxProps = {
-            selectAll,
-            isSelected,
-            toggleSelection,
-            toggleAll,
-            selectType: "checkbox",
-          };
-
-          // Define columns
-          let columns = [
-                            {
-                                Header: this.props.translations.profile,
-                                fixed: "left",
-                                columns: [
-                                    {
-                                        Header: '',
-                                        accessor: 'id',
-                                        width: 40,
-                                        filterable: false,
-                                        Cell: id => (this.memberOptions(id.value)),
-                                    },
-                                    {
-                                        Header: '',
-                                        accessor: 'avatar',
-                                        width: 40,
-                                        filterable: false,
-                                        Cell: profile => (<img src={profile.value.avatar["120x120"]}
-                                                               alt={profile.value.avatar["120x120"]}
-                                                               className={"avatar"}
-                                                               onClick={() => this.showPopUp(profile.value)}/>),
-                                    },
-                                    {
-                                        Header: () => (
-                                          <span>
-                                            {this.state.columns_name[0].localized_name}
-                                            {/*<button className={"show_hide_filters"}*/}
-                                                    {/*onClick={() => this.showHideFilters("last_name")}>*/}
-                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
-                                            {/*</button>*/}
-                                          </span>
-                                        ),
-                                        accessor: "last_name",
-                                        width: 150,
-                                        Cell: this.renderEditable,
-                                        filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
-                                        Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
-                                    },
-                                    {
-                                        Header: () => (
-                                          <div>
-                                              {this.state.columns_name[1].localized_name}
-                                            {/*<button className={"show_hide_filters"}*/}
-                                                    {/*onClick={() => {this.showHideFilters("first_name"); return false}}>*/}
-                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
-                                            {/*</button>*/}
-                                          </div>
-                                        ),
-                                        accessor: "first_name",
-                                        width: 150,
-                                        Cell: this.renderEditable,
-                                        filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
-                                        Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
-                                    },
-                                ]
-                            },
-                            {
-                                Header: this.props.translations.infos,
-                                columns: [
-                                    {
-                                        Header: () => (
-                                          <span>
-                                            {this.state.columns_name[2].localized_name}
-                                            {/*<button className={"show_hide_filters"}*/}
-                                                    {/*onClick={() => this.showHideFilters("email")}>*/}
-                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
-                                            {/*</button>*/}
-                                          </span>
-                                        ),
-                                        accessor: 'email',
-                                        width: 250,
-                                        Cell: this.renderEditable,
-                                        Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
-                                    },
-                                    {
-                                        Header: () => (
-                                          <span>
-                                            {this.state.columns_name[17].localized_name}
-                                            {/*<button className={"show_hide_filters"}*/}
-                                                    {/*onClick={() => this.showHideFilters("teams")}>*/}
-                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
-                                            {/*</button>*/}
-                                          </span>
-                                        ),
-                                        accessor: 'teams',
-                                        width: 175,
-                                        Cell: this.renderEditable,
-                                        filterMethod: (filter, row) => this.getCheckboxTeamsFilterMethod(filter, row, 'teams'),
-                                        Filter: ({ filter, onChange }) => this.getCheckboxTeamsFilter(filter, onChange, 'teams'),
-                                    },
-                                    {
-                                        Header: this.state.columns_name[15].localized_name,
-                                        accessor: 'phone_number',
-                                        width: 150,
-                                        filterable: false,
-                                        Cell: this.renderEditable,
-                                    },
-                                    {
-                                        Header: this.state.columns_name[18].localized_name,
-                                        accessor: 'height',
-                                        width: 100,
-                                        filterable: false,
-                                    },
-                                    {
-                                        Header: this.state.columns_name[19].localized_name,
-                                        accessor: 'weight',
-                                        width: 100,
-                                        filterable: false,
-                                    },
-                                ]
-                            },
-                        ];
-
-          // Calcul max number of parents
-          let max_parents = 0;
-
-          for(var p=0; p<this.state.members_data.length; p++){
-              if(this.state.members_data[p].parents.length > max_parents){
-                  max_parents = this.state.members_data[p].parents.length;
-              }
-          }
-
-          // Create parents columns
-          for(let x=0; x<max_parents; x++){
-              let parent_column = {
-                                Header: this.props.translations.parent + " " + parseInt(x+1),
-                                columns: [
-                                    {
-                                        Header: this.state.columns_name[0].localized_name,
-                                        accessor: 'parents',
-                                        width: 150,
-                                        filterable: false,
-                                        Cell: parents => (this.showParentName(parents, x+1)),
-                                    },
-                                    {
-                                        Header: this.state.columns_name[2].localized_name,
-                                        accessor: 'parents',
-                                        width: 150,
-                                        filterable: false,
-                                        Cell: parents => (this.showParentEmail(parents, x+1)),
-                                    },
-                                    {
-                                        Header: this.state.columns_name[15].localized_name,
-                                        accessor: 'parents',
-                                        width: 150,
-                                        filterable: false,
-                                        Cell: parents => (this.showParentPhone(parents, x+1)),
-                                    },
-                                ]
-                            };
-                            columns.push(parent_column);
-          }
-
-          // Get list of columns
-          let list_columns = [];
-
-          for(var i=0; i<columns.length; i++){
-              for(var j=0; j<columns[i].columns.length; j++){
-                  list_columns.push(columns[i].columns[j].accessor);
-              }
-          }
-
-          // Filter data with global search bar
-          let data = this.state.members_data;
-
-          if (this.state.search) {
-              data = data.filter(row => {
-                return String(row['first_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
-                       String(row['last_name']).toLowerCase().includes(this.state.search.toLowerCase()) ||
-                       String(row['email']).toLowerCase().includes(this.state.search.toLowerCase()) ||
-                       String(row['teams']).toLowerCase().includes(this.state.search.toLowerCase()) ||
-                       String(row['phone_number']).toLowerCase().includes(this.state.search.toLowerCase())
-              });
-          }
-
-          const page_size = this.state.members_data.length;
-
-          return(
-                <CheckboxTable ref={r => (this.checkboxTable = r)} data={data} noDataText="Loading .."
-                             defaultPageSize={20} showPagination={true} columns={columns}
-                             className="-striped -highlight react_table" filterable {...checkboxProps}
-                             defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
-                             ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
-              />
-          )
-      }
-      else{
-          console.log("No members_data!");
-      }
-  }
-
   // Filter with only 1 choice
 
   // Get filter method
@@ -526,9 +511,8 @@ class ClubMembersList extends Component {
       return(
 
               <div>
-                  <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
-                        <img src={"/Icon_search.png"} className={"icon_search"}/>
-                  </button>
+                  <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+                     onClick={() => {this.showHideFilters(column_name)}}/>
 
                   <div>
 
@@ -559,9 +543,8 @@ class ClubMembersList extends Component {
   getTextFilter(filter, onChange, column_name){
       return(
         <div>
-          <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
-                <img src={"/Icon_search.png"} className={"icon_search"}/>
-          </button>
+             <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+                     onClick={() => {this.showHideFilters(column_name)}}/>
               <div>
                   <div id={"filters_"+column_name} className={"filters"}>
                       <div id={"text_filter"}>
@@ -632,9 +615,8 @@ class ClubMembersList extends Component {
       // Create a checkbox for each team
       return(
               <div>
-                  <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
-                        <img src={"/Icon_search.png"} className={"icon_search"}/>
-                  </button>
+                      <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+                          onClick={() => {this.showHideFilters(column_name)}}/>
 
                       <div id={"filters_"+column_name} className={"filters"}>
                         {/*Text filter*/}
@@ -662,21 +644,10 @@ class ClubMembersList extends Component {
   }
 
   // Get filter method
-  getCheckboxTeamsFilterMethod(filter, row, column_name){
+  getCheckboxTeamsFilterMethod(filter, row){
 
       // Get available options
-      let options = [];
-
-      // For each member
-      for (var i = 0; i < this.state.members_data.length; i++) {
-          // For each team
-          for (var j = 0; j < this.state.members_data.length; j++) {
-              if (!options.includes(this.state.members_data[i][column_name][j])
-                  && this.state.members_data[i][column_name][j] !== undefined) {
-                  options.push(this.state.members_data[i][column_name][j]);
-              }
-          }
-      }
+      let options = this.state.teams_options;
 
       // If option checkbox is checked, add this option
       let checked_checkbox = [];
@@ -724,10 +695,9 @@ class ClubMembersList extends Component {
 
       // Create a checkbox for each team
       return (
-              <div>
-                  <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
-                        <img src={"/Icon_search.png"} className={"icon_search"}/>
-                  </button>
+           <div>
+              <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+                     onClick={() => {this.showHideFilters(column_name)}}/>
 
               <div id={"filters_" + column_name} className={"filters"}>
                   {/*Text filter*/}

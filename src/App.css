@@ -301,3 +301,10 @@
   display: inline;
   padding-right: 5px;
 }
+
+.settings_button{
+  width: 20px;
+  height: 25px;
+  padding: 5px;
+  line-height: 0;
+}
