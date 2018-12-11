@@ -362,8 +362,8 @@ class ClubMembersList extends Component {
                                         accessor: 'teams',
                                         width: 175,
                                         Cell: this.renderEditable,
-                                        filterMethod: (filter, row) => this.getCheckboxFilterMethod(filter, row, 'teams'),
-                                        Filter: ({ filter, onChange }) => this.getCheckboxFilter(filter, onChange, 'teams'),
+                                        filterMethod: (filter, row) => this.getCheckboxTeamsFilterMethod(filter, row, 'teams'),
+                                        Filter: ({ filter, onChange }) => this.getCheckboxTeamsFilter(filter, onChange, 'teams'),
                                     },
                                     {
                                         Header: this.state.columns_name[15].localized_name,
@@ -634,6 +634,99 @@ class ClubMembersList extends Component {
                             ))}
                         </div>
                     </div>
+
+          </Popup>
+
+      );
+  }
+
+  // Get filter method
+  getCheckboxTeamsFilterMethod(filter, row, column_name){
+
+      // Get available options
+      let options = [];
+
+      // For each member
+      for (var i = 0; i < this.state.members_data.length; i++) {
+          // For each team
+          for (var j = 0; j < this.state.members_data.length; j++) {
+              if (!options.includes(this.state.members_data[i][column_name][j])
+                  && this.state.members_data[i][column_name][j] !== undefined) {
+                  options.push(this.state.members_data[i][column_name][j]);
+              }
+          }
+      }
+
+      // If option checkbox is checked, add this option
+      let checked_checkbox = [];
+
+      if(document.getElementById("checkbox_filter") !== null) {
+          for (var p = 0; p < options.length; p++) {
+              let checkbox = document.getElementById(options[p]);
+              if (checkbox.checked) {
+                  checked_checkbox.push(options[p]);
+              }
+          }
+      }
+
+      // If textual search
+      if (filter.value !== 'on') {
+          return String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase())
+      }
+      // If no checkbox checked and no textual seach
+      else if (checked_checkbox.length === 0) {
+          return true
+      }
+      // If checkbox checked contains one of teams
+      return (
+          checked_checkbox.some(r => row[filter.id].includes(r))
+      );
+    }
+
+  // Get filter
+  getCheckboxTeamsFilter(filter, onChange, column_name) {
+
+      let options = [];
+
+      // For each member
+      for (var i = 0; i < this.state.members_data.length; i++) {
+          // For each team
+          for (var j = 0; j < this.state.members_data.length; j++) {
+              if (!options.includes(this.state.members_data[i][column_name][j])
+                  && this.state.members_data[i][column_name][j] !== undefined) {
+                  options.push(this.state.members_data[i][column_name][j]);
+              }
+          }
+      }
+
+      options = options.sort();
+
+      // Create a checkbox for each team
+      return (
+          <Popup
+              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
+              position="bottom center"
+              closeOnDocumentClick
+          >
+
+              <div id={"filters_" + column_name} className={"filters"}>
+                  {/*Text filter*/}
+                  <div id={"text_filter"}>
+                      <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                             placeholder={this.props.translations.search + ".."}/>
+                  </div>
+                  <br/>
+                  {/*Checkbox Filter*/}
+                  <div id={"checkbox_filter"}>
+                      {options.map(option => (
+                          <div>
+                              <input type={"checkbox"} id={option}
+                                     onChange={event => onChange(event.target.value)}/>
+                              {option}
+                          </div>
+                      ))}
+                  </div>
+              </div>
 
           </Popup>
 
