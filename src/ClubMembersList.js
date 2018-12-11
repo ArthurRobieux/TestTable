@@ -66,7 +66,8 @@ class ClubMembersList extends Component {
     )
     .then(json_response =>
         console.log(json_response),
-        console.log("deleted")
+        console.log("deleted"),
+        window.location.reload(),
     )
   }
 
@@ -201,7 +202,7 @@ class ClubMembersList extends Component {
     return(
         <div>
             {selected_members.map(member => (
-                member.first_name + " (" + member.id + ") "
+                member.first_name + " " + member.last_name + " (" + member.id + ") "
             ))}
         </div>
     )
@@ -292,10 +293,21 @@ class ClubMembersList extends Component {
 
                             <br/>
 
-                            <div className={"profile_ref js-popin-form"}
-                                onClick={() => this.deleteAPIClubMember([id])}>
-                                    Delete from club
-                            </div>
+                            <Popup
+                                trigger={<div className={"profile_ref js-popin-form"}>
+                                    {this.props.translations.delete_from_club}
+                                </div>}
+                                closeOnDocumentClick
+                                modal
+                            >
+
+                              Are you sure to delete this player from the club ?
+                              <br/><br/>
+                              <button className={"action_button"} onClick={() => this.deleteAPIClubMember([id])}>
+                                  Delete
+                              </button>
+
+                            </Popup>
                     </span>
                  </Popup>
 
@@ -950,6 +962,7 @@ class ClubMembersList extends Component {
               <a href={"/members/invite/"}>
                 <button className={"action_button"}>{this.props.translations.add_a_member}</button>
               </a>
+
               {/*Export members list*/}
               <a href={"/members/export/"}>
                 <button className={"action_button"}>{this.props.translations.export}</button>
@@ -957,11 +970,22 @@ class ClubMembersList extends Component {
 
               {/*Affect players to a team*/}
               <button className={"action_button"}>{this.props.translations.affect_to_team}</button>
+
               {/*Delete players from club*/}
-              {console.log(this.state.selection)}
-              <button className={"action_button"} onClick={() => this.deleteSelectionFromClub()}>
-                  {this.props.translations.delete_from_club}
-              </button>
+              <Popup
+                    trigger={<button className={"action_button"}>{this.props.translations.delete_from_club}</button>}
+                    closeOnDocumentClick
+                    modal
+              >
+                  Are you sure to delete this players from the club ?
+                  <br/><br/>
+                  {this.showSelection()}
+                  <br/>
+                  <button className={"action_button"} onClick={() => this.deleteSelectionFromClub()}>
+                      Delete
+                  </button>
+              </Popup>
+
               {/*Send a global message*/}
               {/*<button className={"action_button"}>Send a message</button>*/}
 

@@ -125,6 +125,7 @@
 .profile_ref{
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .email_warning{
@@ -292,7 +293,7 @@
 }
 
 .popup-content{
-  opacity: 0.95!important;
+  opacity: 0.98!important;
   /*position: relative!important;*/
   /*width: 100px!important;*/
   /*top: 0!important;*/
