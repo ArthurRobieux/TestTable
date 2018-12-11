@@ -769,10 +769,6 @@ class ClubMembersList extends Component {
   }
 
 
-
-
-
-
   // Get members data from the API and convert them in state.members_data
   componentDidMount(){
     this.getApiClubMemberList();
@@ -812,6 +808,7 @@ class ClubMembersList extends Component {
       }
       // If not edition mode
       else {
+          const id = members_data[cellInfo.index].id;
           // If column === email
           if(cellInfo.column.id === 'email'){
               // If status === pending
@@ -866,8 +863,18 @@ class ClubMembersList extends Component {
               }
           }
 
-          // If column !== email
-          const id = members_data[cellInfo.index].id;
+          else if(cellInfo.column.id === 'teams'){
+              return (
+                  // Change URL to static URL
+                  <a href={"/profile/"+id} className={"profile_ref"}>
+                      {members_data[cellInfo.index][cellInfo.column.id].map(team => (
+                        <div className={"team_name"}>{team}</div>
+                      ))}
+                  </a>
+              );
+          }
+
+          // If column !== email !== teams
           return (
               // Change URL to static URL
               <a href={"/profile/"+id} className={"profile_ref"}>
