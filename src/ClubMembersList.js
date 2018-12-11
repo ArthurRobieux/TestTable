@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 
 import ReactTable from "react-table";
+import ReactTableDefaults from "react-table";
 import 'react-table/react-table.css'
+import Popup from 'reactjs-popup'
 
 import PopUp from "./PopUp"
 
@@ -231,17 +233,27 @@ class ClubMembersList extends Component {
               {/*<button onClick={() => this.showMemberOptions(id)}> </button>*/}
 
               <div id={"member_"+id+"_options"} className={"members_options"}>
-                    <a className={"profile_ref js-popin-form"}
-                        href={"/members/board/" + id + "/update/" }>
-                            Up
-                    </a>
 
-                    /
+                  <Popup
+                    trigger={<button className="button"> + </button>}
+                    closeOnDocumentClick
+                    position={"right center"}
+                  >
+                    <span>
+                            <a className={"profile_ref js-popin-form"}
+                                href={"/members/board/" + id + "/update/" }>
+                                    Update
+                            </a>
 
-                    <a className={"profile_ref js-popin-form"}
-                        href={"/profile/parents/" + id + "/create/roster/" }>
-                            Ap
-                    </a>
+                            <br/>
+
+                            <a className={"profile_ref js-popin-form"}
+                                href={"/profile/parents/" + id + "/create/roster/" }>
+                                    Add parent
+                            </a>
+                    </span>
+                 </Popup>
+
               </div>
 
           </div>
@@ -271,7 +283,7 @@ class ClubMembersList extends Component {
                                     {
                                         Header: '',
                                         accessor: 'id',
-                                        width: 75,
+                                        width: 40,
                                         filterable: false,
                                         Cell: id => (this.memberOptions(id.value)),
                                     },
@@ -289,10 +301,10 @@ class ClubMembersList extends Component {
                                         Header: () => (
                                           <span>
                                             {this.state.columns_name[0].localized_name}
-                                            <button className={"show_hide_filters"}
-                                                    onClick={() => this.showHideFilters("last_name")}>
-                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
-                                            </button>
+                                            {/*<button className={"show_hide_filters"}*/}
+                                                    {/*onClick={() => this.showHideFilters("last_name")}>*/}
+                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
+                                            {/*</button>*/}
                                           </span>
                                         ),
                                         accessor: "last_name",
@@ -305,10 +317,10 @@ class ClubMembersList extends Component {
                                         Header: () => (
                                           <div>
                                               {this.state.columns_name[1].localized_name}
-                                            <button className={"show_hide_filters"}
-                                                    onClick={() => {this.showHideFilters("first_name"); return false}}>
-                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
-                                            </button>
+                                            {/*<button className={"show_hide_filters"}*/}
+                                                    {/*onClick={() => {this.showHideFilters("first_name"); return false}}>*/}
+                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
+                                            {/*</button>*/}
                                           </div>
                                         ),
                                         accessor: "first_name",
@@ -326,10 +338,10 @@ class ClubMembersList extends Component {
                                         Header: () => (
                                           <span>
                                             {this.state.columns_name[2].localized_name}
-                                            <button className={"show_hide_filters"}
-                                                    onClick={() => this.showHideFilters("email")}>
-                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
-                                            </button>
+                                            {/*<button className={"show_hide_filters"}*/}
+                                                    {/*onClick={() => this.showHideFilters("email")}>*/}
+                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
+                                            {/*</button>*/}
                                           </span>
                                         ),
                                         accessor: 'email',
@@ -341,10 +353,10 @@ class ClubMembersList extends Component {
                                         Header: () => (
                                           <span>
                                             {this.state.columns_name[17].localized_name}
-                                            <button className={"show_hide_filters"}
-                                                    onClick={() => this.showHideFilters("teams")}>
-                                                <img src={"/Icon_search.png"} className={"icon_search"}/>
-                                            </button>
+                                            {/*<button className={"show_hide_filters"}*/}
+                                                    {/*onClick={() => this.showHideFilters("teams")}>*/}
+                                                {/*<img src={"/Icon_search.png"} className={"icon_search"}/>*/}
+                                            {/*</button>*/}
                                           </span>
                                         ),
                                         accessor: 'teams',
@@ -446,6 +458,14 @@ class ClubMembersList extends Component {
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
+
+                             // getTheadThProps={(state, rowInfo, column, instance) => ({
+                             //
+                             //      onClick: (e, onToggle) => {
+                             //        console.log("hello");
+                             //      }
+                             //
+                             // })}
               />
           )
       }
@@ -482,41 +502,53 @@ class ClubMembersList extends Component {
 
       // Create select options
       return(
-          <div>
+          <Popup
+              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
+              position="bottom center"
+              closeOnDocumentClick
+          >
+              <div>
 
-              <div id={"filters_"+column_name} className={"filters"}>
-                  {/*Text filter*/}
-                  <div id={"text_filter"}>
-                        <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                            placeholder={this.props.translations.search + ".."}/><br/>
+                  <div id={"filters_"+column_name} className={"filters"}>
+                      {/*Text filter*/}
+                      <div id={"text_filter"}>
+                            <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                                placeholder={this.props.translations.search + ".."}/><br/>
+                      </div>
+                      <br/>
+                    {/*Select filter  */}
+                    <div id={"select_filter"}>
+                    <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
+                        <option value='All'>All</option>
+                        {options.map(option => (
+                            <option value={option}>{option}</option>
+                        ))}
+                    </select>
+                    </div>
                   </div>
-                  <br/>
-                {/*Select filter  */}
-                <div id={"select_filter"}>
-                <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
-                    <option value='All'>All</option>
-                    {options.map(option => (
-                        <option value={option}>{option}</option>
-                    ))}
-                </select>
-                </div>
-              </div>
 
-          </div>
+              </div>
+          </Popup>
       );
   }
 
   // Get filter
   getTextFilter(filter, onChange, column_name){
       return(
-          <div>
-              <div id={"filters_"+column_name} className={"filters"}>
-                  <div id={"text_filter"}>
-                    <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                           placeholder={this.props.translations.search + ".."}/>
+          <Popup
+              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
+              position="bottom center"
+              closeOnDocumentClick
+          >
+              <div>
+                  <div id={"filters_"+column_name} className={"filters"}>
+                      <div id={"text_filter"}>
+                        <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                               placeholder={this.props.translations.search + ".."}/>
+                      </div>
                   </div>
               </div>
-          </div>
+          </Popup>
       );
   }
 
@@ -577,29 +609,33 @@ class ClubMembersList extends Component {
 
       // Create a checkbox for each team
       return(
-        <div>
+          <Popup
+              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
+              position="bottom center"
+              closeOnDocumentClick
+          >
 
-              <div id={"filters_"+column_name} className={"filters"}>
-                {/*Text filter*/}
-                <div id={"text_filter"}>
-                    <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                           placeholder={this.props.translations.search + ".."}/>
-                </div>
-                <br/>
-                {/*Checkbox Filter*/}
-                <div id={"checkbox_filter"}>
-                    <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
-                    All
-                    {options.map(option => (
-                        <div>
-                            <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
-                            {option}
+                      <div id={"filters_"+column_name} className={"filters"}>
+                        {/*Text filter*/}
+                        <div id={"text_filter"}>
+                            <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                                   placeholder={this.props.translations.search + ".."}/>
                         </div>
-                    ))}
-                </div>
-            </div>
+                        <br/>
+                        {/*Checkbox Filter*/}
+                        <div id={"checkbox_filter"}>
+                            <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
+                            All
+                            {options.map(option => (
+                                <div>
+                                    <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
+                                    {option}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-        </div>
+          </Popup>
 
       );
   }
@@ -608,12 +644,12 @@ class ClubMembersList extends Component {
 
       const d = document.getElementById("filters_"+column_name);
 
-      if(d.style.opacity === '1'){
+      if(d.style.opacity === '0.95'){
           d.style.opacity = '0';
           d.style.display = 'none';
       }
       else {
-          d.style.opacity = '1';
+          d.style.opacity = '0.95';
           d.style.display = 'block';
       }
 

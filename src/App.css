@@ -258,8 +258,7 @@
 }
 
 .filters{
-  opacity: 0;
-  display: none;
+  opacity: 1;
   transition-duration: 0.2s;
   background: white;
   padding: 5px;
@@ -285,4 +284,17 @@
 
 .icon_search{
   width: 13px;
+  position: relative;
+  bottom: 27px;
+  float: left;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.popup-content{
+  opacity: 0.95!important;
+  /*position: relative!important;*/
+  /*width: 100px!important;*/
+  /*top: 0!important;*/
+  /*left: 20px!important;*/
 }
