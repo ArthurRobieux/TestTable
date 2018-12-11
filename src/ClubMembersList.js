@@ -44,6 +44,33 @@ class ClubMembersList extends Component {
   }
 
   // Get members data from API and save them in state
+  deleteAPIClubMember(profiles){
+
+    const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id + '/profiles/';
+
+    console.log(profiles);
+
+    fetch(API_URL, {
+        method: "DELETE",
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer fc1c759891085a50a296af72a74a6f93767e2ab1',
+        },
+        body: JSON.stringify({
+            profiles: profiles,
+        }),
+    })
+    .then(response =>
+        response.json()
+    )
+    .then(json_response =>
+        console.log(json_response),
+        console.log("deleted")
+    )
+  }
+
+  // Get members data from API and save them in state
   getApiClubMemberList(){
 
     const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id + '/profiles/';
@@ -180,6 +207,17 @@ class ClubMembersList extends Component {
     )
   };
 
+  // Delete selected members from the club
+  deleteSelectionFromClub(){
+    let selected_members = [];
+    for(var i=0; i<this.state.members_data.length; i++){
+        if(this.isSelected(this.state.members_data[i]._id)){
+            selected_members.push(this.state.members_data[i].id);
+        }
+    }
+    this.deleteAPIClubMember(selected_members);
+  }
+
   // Log selected lines
   changeEditionMode = () => {
     this.setState({isEditionMode: !this.state.isEditionMode});
@@ -251,6 +289,13 @@ class ClubMembersList extends Component {
                                 href={"/profile/parents/" + id + "/create/roster/" }>
                                     Add parent
                             </a>
+
+                            <br/>
+
+                            <div className={"profile_ref js-popin-form"}
+                                onClick={() => this.deleteAPIClubMember([id])}>
+                                    Delete from club
+                            </div>
                     </span>
                  </Popup>
 
@@ -896,7 +941,6 @@ class ClubMembersList extends Component {
           {/* Menu 2 */}
           <div id={"members_list_menu2"}>
 
-              <h4>Actions générales</h4>
               {/*Edition Mode*/}
               {/*<button onClick={this.changeEditionMode} className={"action_button"}>Edition Mode</button>*/}
               {/*Log Selection*/}
@@ -907,16 +951,17 @@ class ClubMembersList extends Component {
                 <button className={"action_button"}>{this.props.translations.add_a_member}</button>
               </a>
               {/*Export members list*/}
-              <a href={"/members/export/?season_id=18"}>
+              <a href={"/members/export/"}>
                 <button className={"action_button"}>{this.props.translations.export}</button>
               </a>
 
-
-              <h4>Actions collectives</h4>
               {/*Affect players to a team*/}
               <button className={"action_button"}>{this.props.translations.affect_to_team}</button>
               {/*Delete players from club*/}
-              <button className={"action_button"}>{this.props.translations.delete_from_club}</button>
+              {console.log(this.state.selection)}
+              <button className={"action_button"} onClick={() => this.deleteSelectionFromClub()}>
+                  {this.props.translations.delete_from_club}
+              </button>
               {/*Send a global message*/}
               {/*<button className={"action_button"}>Send a message</button>*/}
 
