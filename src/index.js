@@ -23,7 +23,9 @@ translations['affect_to_team'] = root.dataset.affect_to_team;
 translations['delete_from_club'] = root.dataset.delete_from_club;
 translations['profile'] = root.dataset.profile;
 translations['infos'] = root.dataset.infos;
-
+translations['add_a_parent'] = root.dataset.add_a_parent;
+translations['update_office_presence'] = root.dataset.update_office_presence;
+translations['delete_from_club_confirmation'] = root.dataset.delete_from_club_confirmation;
 
 class MembersListApp extends React.Component {
 

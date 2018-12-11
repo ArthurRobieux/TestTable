@@ -281,14 +281,14 @@ class ClubMembersList extends Component {
                     <span>
                             <a className={"profile_ref js-popin-form"}
                                 href={"/members/board/" + id + "/update/" }>
-                                    Update
+                                    {this.props.translations.update_office_presence}
                             </a>
 
                             <br/>
 
                             <a className={"profile_ref js-popin-form"}
                                 href={"/profile/parents/" + id + "/create/roster/" }>
-                                    Add parent
+                                    {this.props.translations.add_a_parent}
                             </a>
 
                             <br/>
@@ -301,10 +301,10 @@ class ClubMembersList extends Component {
                                 modal
                             >
 
-                              Are you sure to delete this player from the club ?
+                              {this.props.translations.delete_from_club_confirmation}
                               <br/><br/>
                               <button className={"action_button"} onClick={() => this.deleteAPIClubMember([id])}>
-                                  Delete
+                                  {this.props.translations.delete_from_club}
                               </button>
 
                             </Popup>
@@ -977,12 +977,12 @@ class ClubMembersList extends Component {
                     closeOnDocumentClick
                     modal
               >
-                  Are you sure to delete this players from the club ?
+                  {this.props.translations.delete_from_club_confirmation}
                   <br/><br/>
                   {this.showSelection()}
                   <br/>
                   <button className={"action_button"} onClick={() => this.deleteSelectionFromClub()}>
-                      Delete
+                      {this.props.translations.delete_from_club}
                   </button>
               </Popup>
 
