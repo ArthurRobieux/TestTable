@@ -48,8 +48,6 @@ class ClubMembersList extends Component {
 
     const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id + '/profiles/';
 
-    console.log(profiles);
-
     fetch(API_URL, {
         method: "DELETE",
         credentials: 'include',
@@ -182,15 +180,6 @@ class ClubMembersList extends Component {
     return this.state.selection.includes(key);
   };
 
-  // Log selected lines
-  logSelection = () => {
-    for(var i=0; i<this.state.members_data.length; i++){
-        if(this.isSelected(this.state.members_data[i]._id)){
-            console.log(this.state.members_data[i]);
-        }
-    }
-  };
-
   // Show selected lines
   showSelection = () => {
     let selected_members = [];
@@ -253,24 +242,10 @@ class ClubMembersList extends Component {
       }
   }
 
-  // Show personnal member option
-  showMemberOptions(id){
-    let d = document.getElementById("member_"+id+"_options");
-
-    if(d.style.display === "block") {
-        d.style.display = "none";
-    }
-    else{
-        d.style.display = "block";
-    }
-  }
-
+  // Pop In with member options
   memberOptions(id){
       return(
           <div>
-
-              {/*<button onClick={() => this.showMemberOptions(id)}> </button>*/}
-
               <div id={"member_"+id+"_options"} className={"members_options"}>
 
                   <Popup
@@ -310,9 +285,7 @@ class ClubMembersList extends Component {
                             </Popup>
                     </span>
                  </Popup>
-
               </div>
-
           </div>
       )
   }
@@ -515,14 +488,6 @@ class ClubMembersList extends Component {
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
-
-                             // getTheadThProps={(state, rowInfo, column, instance) => ({
-                             //
-                             //      onClick: (e, onToggle) => {
-                             //        console.log("hello");
-                             //      }
-                             //
-                             // })}
               />
           )
       }
@@ -559,44 +524,44 @@ class ClubMembersList extends Component {
 
       // Create select options
       return(
-          <Popup
-              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
-              position="bottom center"
-              closeOnDocumentClick
-          >
+
               <div>
+                  <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
+                        <img src={"/Icon_search.png"} className={"icon_search"}/>
+                  </button>
 
-                  <div id={"filters_"+column_name} className={"filters"}>
-                      {/*Text filter*/}
-                      <div id={"text_filter"}>
-                            <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
-                                placeholder={this.props.translations.search + ".."}/><br/>
+                  <div>
+
+                      <div id={"filters_"+column_name} className={"filters"}>
+                          {/*Text filter*/}
+                          <div id={"text_filter"}>
+                                <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
+                                    placeholder={this.props.translations.search + ".."}/><br/>
+                          </div>
+                          <br/>
+                        {/*Select filter  */}
+                        <div id={"select_filter"}>
+                        <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
+                            <option value='All'>All</option>
+                            {options.map(option => (
+                                <option value={option}>{option}</option>
+                            ))}
+                        </select>
+                        </div>
                       </div>
-                      <br/>
-                    {/*Select filter  */}
-                    <div id={"select_filter"}>
-                    <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
-                        <option value='All'>All</option>
-                        {options.map(option => (
-                            <option value={option}>{option}</option>
-                        ))}
-                    </select>
-                    </div>
-                  </div>
 
+                  </div>
               </div>
-          </Popup>
       );
   }
 
   // Get filter
   getTextFilter(filter, onChange, column_name){
       return(
-          <Popup
-              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
-              position="bottom center"
-              closeOnDocumentClick
-          >
+        <div>
+          <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
+                <img src={"/Icon_search.png"} className={"icon_search"}/>
+          </button>
               <div>
                   <div id={"filters_"+column_name} className={"filters"}>
                       <div id={"text_filter"}>
@@ -605,7 +570,7 @@ class ClubMembersList extends Component {
                       </div>
                   </div>
               </div>
-          </Popup>
+          </div>
       );
   }
 
@@ -666,11 +631,10 @@ class ClubMembersList extends Component {
 
       // Create a checkbox for each team
       return(
-          <Popup
-              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
-              position="bottom center"
-              closeOnDocumentClick
-          >
+              <div>
+                  <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
+                        <img src={"/Icon_search.png"} className={"icon_search"}/>
+                  </button>
 
                       <div id={"filters_"+column_name} className={"filters"}>
                         {/*Text filter*/}
@@ -692,7 +656,7 @@ class ClubMembersList extends Component {
                         </div>
                     </div>
 
-          </Popup>
+          </div>
 
       );
   }
@@ -760,11 +724,10 @@ class ClubMembersList extends Component {
 
       // Create a checkbox for each team
       return (
-          <Popup
-              trigger={<img src={"/Icon_search.png"} className={"icon_search"}/>}
-              position="bottom center"
-              closeOnDocumentClick
-          >
+              <div>
+                  <button className={"show_hide_filters"} onClick={() => {this.showHideFilters(column_name); return false}}>
+                        <img src={"/Icon_search.png"} className={"icon_search"}/>
+                  </button>
 
               <div id={"filters_" + column_name} className={"filters"}>
                   {/*Text filter*/}
@@ -785,7 +748,7 @@ class ClubMembersList extends Component {
                   </div>
               </div>
 
-          </Popup>
+          </div>
 
       );
   }
@@ -802,7 +765,6 @@ class ClubMembersList extends Component {
           d.style.opacity = '0.95';
           d.style.display = 'block';
       }
-
       return false;
   }
 
