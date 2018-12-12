@@ -352,3 +352,17 @@
     opacity: 0;
   }
 }
+
+
+
+.filter_title{
+  float: left;
+  font-size: 12px;
+  display: block;
+}
+
+#sorting_filter{
+  font-size: 12px;
+  display: block;
+  cursor: pointer;
+}

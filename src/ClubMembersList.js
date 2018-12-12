@@ -41,6 +41,7 @@ class ClubMembersList extends Component {
       teams_options: [],
       columns: [],
       seasons_list: [],
+      actual_sorting: {},
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
@@ -204,6 +205,7 @@ class ClubMembersList extends Component {
                                     accessor: 'id',
                                     width: 40,
                                     filterable: false,
+                                    sortable: false,
                                     Cell: id => (this.memberOptions(id.value)),
                                 },
                                 {
@@ -211,6 +213,7 @@ class ClubMembersList extends Component {
                                     accessor: 'avatar',
                                     width: 40,
                                     filterable: false,
+                                    sortable: false,
                                     Cell: profile => (<img src={profile.value.avatar["120x120"]}
                                                            alt={profile.value.avatar["120x120"]}
                                                            className={"avatar"}
@@ -220,6 +223,7 @@ class ClubMembersList extends Component {
                                     Header: () => (<span>{this.state.columns_name[0].localized_name}</span>),
                                     accessor: "last_name",
                                     width: 150,
+                                    sortable: false,
                                     Cell: this.renderEditable,
                                     filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'last_name'),
                                     Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'last_name'),
@@ -228,6 +232,7 @@ class ClubMembersList extends Component {
                                     Header: () => (<div>{this.state.columns_name[1].localized_name}</div>),
                                     accessor: "first_name",
                                     width: 150,
+                                    sortable: false,
                                     Cell: this.renderEditable,
                                     filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'first_name'),
                                     Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'first_name'),
@@ -241,6 +246,7 @@ class ClubMembersList extends Component {
                                     Header: () => (<span>{this.state.columns_name[2].localized_name}</span>),
                                     accessor: 'email',
                                     width: 280,
+                                    sortable: false,
                                     Cell: this.renderEditable,
                                     Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
                                 },
@@ -248,6 +254,7 @@ class ClubMembersList extends Component {
                                     Header: () => (<span>{this.state.columns_name[17].localized_name}</span>),
                                     accessor: 'teams',
                                     width: 175,
+                                    sortable: false,
                                     Cell: this.renderEditable,
                                     filterMethod: (filter, row) => this.getCheckboxTeamsFilterMethod(filter, row, 'teams'),
                                     Filter: ({ filter, onChange }) => this.getCheckboxTeamsFilter(filter, onChange, 'teams'),
@@ -256,6 +263,7 @@ class ClubMembersList extends Component {
                                     Header: this.state.columns_name[16].localized_name,
                                     accessor: 'licence_number',
                                     width: 150,
+                                    sortable: false,
                                     filterable: false,
                                     Cell: this.renderEditable,
                                 },
@@ -263,6 +271,7 @@ class ClubMembersList extends Component {
                                     Header: this.state.columns_name[15].localized_name,
                                     accessor: 'phone_number',
                                     width: 150,
+                                    sortable: false,
                                     filterable: false,
                                     Cell: this.renderEditable,
                                 },
@@ -270,12 +279,14 @@ class ClubMembersList extends Component {
                                     Header: this.state.columns_name[18].localized_name,
                                     accessor: 'height',
                                     width: 100,
+                                    sortable: false,
                                     filterable: false,
                                 },
                                 {
                                     Header: this.state.columns_name[19].localized_name,
                                     accessor: 'weight',
                                     width: 100,
+                                    sortable: false,
                                     filterable: false,
                                 },
                             ]
@@ -377,6 +388,7 @@ class ClubMembersList extends Component {
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
                              ? String(row[filter.id]).toLowerCase().includes(filter.value.toLowerCase()) : false}
+                             sorted={[this.state.actual_sorting]}
               />
           )
       }
@@ -563,6 +575,16 @@ class ClubMembersList extends Component {
       )
   }
 
+
+  // Sort a column table asc or desc
+  sortTable(column_name, direction){
+      let actual_sorting =  {};
+      if(direction==='asc'){actual_sorting = {id: column_name, asc: true};}
+      else {actual_sorting = {id: column_name, desc: true};}
+      this.setState({actual_sorting: actual_sorting})
+  }
+
+
   // Filter with only 1 choice
 
   // Get filter method
@@ -600,12 +622,20 @@ class ClubMembersList extends Component {
                   <div>
 
                       <div id={"filters_"+column_name} className={"filters"}>
+
+                          {/*Sorting*/}
+                          <div id={"sorting_filter"}>
+                              <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
+                              <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                          </div>
+
                           {/*Text filter*/}
                           <div id={"text_filter"}>
                                 <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
                                     placeholder={this.props.translations.search + ".."}/><br/>
                           </div>
                           <br/>
+
                         {/*Select filter  */}
                         <div id={"select_filter"}>
                         <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
@@ -615,6 +645,7 @@ class ClubMembersList extends Component {
                             ))}
                         </select>
                         </div>
+
                       </div>
 
                   </div>
@@ -631,6 +662,13 @@ class ClubMembersList extends Component {
                      onClick={() => {this.showHideFilters(column_name)}}/>
               <div>
                   <div id={"filters_"+column_name} className={"filters"}>
+                      {/*Sorting*/}
+                      <div id={"sorting_filter"}>
+                          <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
+                          <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                      </div>
+
+                      {/*Text filter*/}
                       <div id={"text_filter"}>
                         <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
                                placeholder={this.props.translations.search + ".."}/>
@@ -704,6 +742,13 @@ class ClubMembersList extends Component {
                           onClick={() => {this.showHideFilters(column_name)}}/>
 
                       <div id={"filters_"+column_name} className={"filters"}>
+
+                          {/*Sorting*/}
+                          <div id={"sorting_filter"}>
+                              <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
+                              <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                          </div>
+
                         {/*Text filter*/}
                         <div id={"text_filter"}>
                             <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
@@ -786,6 +831,12 @@ class ClubMembersList extends Component {
                      onClick={() => {this.showHideFilters(column_name)}}/>
 
               <div id={"filters_" + column_name} className={"filters"}>
+                  {/*Sorting*/}
+                  <div id={"sorting_filter"}>
+                      <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
+                      <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                  </div>
+
                   {/*Text filter*/}
                   <div id={"text_filter"}>
                       <input id={"text_filter"} type={"text"} onChange={event => onChange(event.target.value)}
