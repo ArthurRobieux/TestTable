@@ -311,3 +311,8 @@
   line-height: 0;
   cursor: pointer;
 }
+
+.select_season{
+  position: relative;
+  top: 6px;
+}

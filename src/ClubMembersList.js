@@ -239,7 +239,7 @@ class ClubMembersList extends Component {
                                 {
                                     Header: () => (<span>{this.state.columns_name[2].localized_name}</span>),
                                     accessor: 'email',
-                                    width: 250,
+                                    width: 280,
                                     Cell: this.renderEditable,
                                     Filter: ({ filter, onChange }) => this.getTextFilter(filter, onChange, 'email'),
                                 },
@@ -951,19 +951,19 @@ class ClubMembersList extends Component {
               <input className={"action_filter"} type={"text"} placeholder={this.props.translations.search + ".."}
                      value={this.state.search} onChange={e => this.setState({search: e.target.value})}/>
 
-              {this.showSelection()}
+              {/*{this.showSelection()}*/}
 
-              <select onChange={e => this.getApiClubSeasonMemberList(e.target.value)}>
+              <select onChange={e => this.getApiClubSeasonMemberList(e.target.value)} className={"select_season"}>
                     <option value='all'>All</option>
                     {this.state.seasons_list.map(season => (
                         <option value={season.id}>{season.slug_name}</option>
                     ))}
-                </select>
+              </select>
 
           </div>
 
-          <button onClick={() => this.showHideMenu(1)} className={"show_hide_menu"}>+</button>
-          <hr color="black" size="1" className={"hr_between_menu"}/>
+          {/*<button onClick={() => this.showHideMenu(1)} className={"show_hide_menu"}>+</button>*/}
+          {/*<hr color="black" size="1" className={"hr_between_menu"}/>*/}
 
           {/* Menu 2 */}
           <div id={"members_list_menu2"}>
@@ -1006,8 +1006,8 @@ class ClubMembersList extends Component {
 
           </div>
 
-          <button onClick={() => this.showHideMenu(2)} className={"show_hide_menu"}>+</button>
-          <hr color="black" size="1" className={"hr_between_menu"}/>
+          {/*<button onClick={() => this.showHideMenu(2)} className={"show_hide_menu"}>+</button>*/}
+          {/*<hr color="black" size="1" className={"hr_between_menu"}/>*/}
 
           {/* Table */}
           <div>
