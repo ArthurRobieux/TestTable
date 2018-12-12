@@ -373,6 +373,10 @@ class ClubMembersList extends Component {
       }
       else{
           console.log("No members_data!");
+          return(<div className="lds-ripple">
+              <div></div>
+              <div></div>
+          </div>);
       }
   }
 
