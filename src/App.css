@@ -361,3 +361,11 @@
   text-align: left;
   padding: 10px;
 }
+
+.sorting_choice{
+  opacity: 0.75;
+}
+
+.sorting_choice:hover{
+  opacity: 1;
+}

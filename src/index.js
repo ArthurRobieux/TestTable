@@ -28,6 +28,8 @@ translations['update_office_presence'] = root.dataset.update_office_presence;
 translations['delete_from_club_confirmation'] = root.dataset.delete_from_club_confirmation;
 translations['no_data'] = root.dataset.no_data;
 translations['all'] = root.dataset.all;
+translations['ascending'] = root.dataset.ascending;
+translations['descending'] = root.dataset.descending;
 
 class MembersListApp extends React.Component {
 

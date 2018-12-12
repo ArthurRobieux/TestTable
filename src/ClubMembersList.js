@@ -626,9 +626,12 @@ class ClubMembersList extends Component {
 
                           {/*Sorting*/}
                           <div id={"sorting_filter"}>
-
-                              <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
-                              <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                              <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'asc')}>
+                                  ▲ {this.props.translations.ascending}
+                              </div>
+                              <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'desc')}>
+                                  ▼ {this.props.translations.descending}
+                              </div>
                           </div>
 
                           {/*Text filter*/}
@@ -666,8 +669,12 @@ class ClubMembersList extends Component {
                   <div id={"filters_"+column_name} className={"filters"}>
                       {/*Sorting*/}
                       <div id={"sorting_filter"}>
-                          <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
-                          <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                          <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'asc')}>
+                              ▲ {this.props.translations.ascending}
+                          </div>
+                          <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'desc')}>
+                              ▼ {this.props.translations.descending}
+                          </div>
                       </div>
 
                       {/*Text filter*/}
@@ -745,11 +752,15 @@ class ClubMembersList extends Component {
 
                       <div id={"filters_"+column_name} className={"filters"}>
 
-                          {/*Sorting*/}
-                          <div id={"sorting_filter"}>
-                              <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
-                              <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                      {/*Sorting*/}
+                      <div id={"sorting_filter"}>
+                          <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'asc')}>
+                              ▲ {this.props.translations.ascending}
                           </div>
+                          <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'desc')}>
+                              ▼ {this.props.translations.descending}
+                          </div>
+                      </div>
 
                         {/*Text filter*/}
                         <div id={"text_filter"}>
@@ -835,8 +846,12 @@ class ClubMembersList extends Component {
               <div id={"filters_" + column_name} className={"filters"}>
                   {/*Sorting*/}
                   <div id={"sorting_filter"}>
-                      <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
-                      <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
+                      <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'asc')}>
+                          ▲ {this.props.translations.ascending}
+                      </div>
+                      <div className={"sorting_choice"} onClick={()=> this.sortTable(column_name, 'desc')}>
+                          ▼ {this.props.translations.descending}
+                      </div>
                   </div>
 
                   {/*Text filter*/}
