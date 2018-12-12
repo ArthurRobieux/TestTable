@@ -584,7 +584,8 @@ class ClubMembersList extends Component {
       return(
 
               <div>
-                  <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+                  <img src={"http://cdn.local.sporteasy.net:8000/static/themes/v2/images/frontend/clubs/Icon_search.png"}
+                       className={"icon_search show_hide_filters"}
                      onClick={() => {this.showHideFilters(column_name)}}/>
 
                   <div>
@@ -616,7 +617,8 @@ class ClubMembersList extends Component {
   getTextFilter(filter, onChange, column_name){
       return(
         <div>
-             <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+             <img src={"http://cdn.local.sporteasy.net:8000/static/themes/v2/images/frontend/clubs/Icon_search.png"}
+                  className={"icon_search show_hide_filters"}
                      onClick={() => {this.showHideFilters(column_name)}}/>
               <div>
                   <div id={"filters_"+column_name} className={"filters"}>
@@ -688,7 +690,8 @@ class ClubMembersList extends Component {
       // Create a checkbox for each team
       return(
               <div>
-                      <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+                      <img src={"http://cdn.local.sporteasy.net:8000/static/themes/v2/images/frontend/clubs/Icon_search.png"}
+                           className={"icon_search show_hide_filters"}
                           onClick={() => {this.showHideFilters(column_name)}}/>
 
                       <div id={"filters_"+column_name} className={"filters"}>
@@ -769,7 +772,8 @@ class ClubMembersList extends Component {
       // Create a checkbox for each team
       return (
            <div>
-              <img src={"/Icon_search.png"} className={"icon_search show_hide_filters"}
+              <img src={"http://cdn.local.sporteasy.net:8000/static/themes/v2/images/frontend/clubs/Icon_search.png"}
+                   className={"icon_search show_hide_filters"}
                      onClick={() => {this.showHideFilters(column_name)}}/>
 
               <div id={"filters_" + column_name} className={"filters"}>

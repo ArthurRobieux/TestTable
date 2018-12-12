@@ -12,7 +12,7 @@ class PopUp extends Component {
         d.style.opacity = "0";
         d.style.width = "0";
         d.style.height = "0";
-        
+
       }
 
       // Pop-up content
@@ -20,7 +20,8 @@ class PopUp extends Component {
         try{
           return(
               <div id={"popup"}>
-                <img src={"/close.png"} className={"close_popup"}
+                <img src={"http://cdn.local.sporteasy.net:8000/static/themes/v2/images/frontend/clubs/close.png"}
+                     className={"close_popup"}
                      onClick={() => this.hidePopUp()}
                      alt={"close"}/>
 
