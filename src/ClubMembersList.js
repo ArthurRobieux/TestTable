@@ -262,10 +262,11 @@ class ClubMembersList extends Component {
                                 {
                                     Header: this.state.columns_name[16].localized_name,
                                     accessor: 'licence_number',
-                                    width: 150,
+                                    width: 200,
                                     sortable: false,
-                                    filterable: false,
                                     Cell: this.renderEditable,
+                                    filterMethod: (filter, row) => this.getSelectFilterMethod(filter, row, 'licence_number'),
+                                    Filter: ({ filter, onChange }) => this.getSelectFilter(filter, onChange, 'licence_number'),
                                 },
                                 {
                                     Header: this.state.columns_name[15].localized_name,
@@ -625,6 +626,7 @@ class ClubMembersList extends Component {
 
                           {/*Sorting*/}
                           <div id={"sorting_filter"}>
+
                               <div onClick={()=> this.sortTable(column_name, 'asc')}>▲ Croissant</div>
                               <div onClick={()=> this.sortTable(column_name, 'desc')}>▼ Décroissant</div>
                           </div>

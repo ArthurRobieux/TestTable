@@ -355,14 +355,9 @@
 
 
 
-.filter_title{
-  float: left;
-  font-size: 12px;
-  display: block;
-}
-
 #sorting_filter{
   font-size: 12px;
-  display: block;
   cursor: pointer;
+  text-align: left;
+  padding: 10px;
 }
