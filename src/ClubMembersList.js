@@ -40,8 +40,60 @@ class ClubMembersList extends Component {
       columns_name: [],
       teams_options: [],
       columns: [],
+      seasons_list: [],
     };
     this.renderEditable = this.renderEditable.bind(this);
+  }
+
+  // Get members data from API and save them in state
+  getApiSeasonClubList(){
+
+    const API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id + '/seasons';
+
+    fetch(API_URL, {
+        method: "GET",
+        credentials: 'include',
+    })
+    .then(response =>
+        response.json()
+    )
+    .then(json_response =>
+        this.createSeasonClubList(json_response)
+    )
+  }
+
+  // Get seasons list from API
+  createSeasonClubList(api_response){
+      let seasons_list = [];
+      for(var i=0; i<api_response['results'].length; i++){
+          seasons_list.push(api_response['results'][i]);
+      }
+      this.setState({seasons_list: seasons_list});
+  }
+
+  // Get season club member list
+  getApiClubSeasonMemberList(season_id){
+
+    let API_URL = '';
+
+    if(season_id === 'all'){
+        API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id + '/profiles/';
+    }
+    else {
+        API_URL = 'http://api.local.sporteasy.net:8000/v2.1/clubs/' + this.props.club_id
+            + '/profiles/?season_id=' + season_id;
+    }
+
+    fetch(API_URL, {
+        method: "GET",
+        credentials: 'include',
+    })
+    .then(response =>
+        response.json()
+    )
+    .then(json_response =>
+        this.createDataFromJson(json_response),
+    )
   }
 
   // Get members data from API and save them in state
@@ -262,6 +314,23 @@ class ClubMembersList extends Component {
                         columns.push(parent_column);
       }
       this.setState({columns:columns});
+
+      // var filters_first_name = document.getElementById("filters_first_name");
+      //
+      // document.addEventListener('click', function(event) {
+      //
+      //   var isClickInside = filters_first_name.contains(event.target);
+      //
+      //   console.log("event listener");
+      //
+      //   if (!isClickInside && filters_first_name.style.display === 'block') {
+      //       console.log("outside first_name");
+      //       // popElement.style.opacity = '0';
+      //       // popElement.style.display = 'none';
+      //   }
+      //
+      //  });
+
   }
 
   // Show Table if there is data in the state.members_data
@@ -742,7 +811,7 @@ class ClubMembersList extends Component {
   // Get members data from the API and convert them in state.members_data
   componentDidMount(){
     this.getApiClubMemberList();
-
+    this.getApiSeasonClubList();
   }
 
   renderEditable(cellInfo) {
@@ -883,6 +952,13 @@ class ClubMembersList extends Component {
                      value={this.state.search} onChange={e => this.setState({search: e.target.value})}/>
 
               {this.showSelection()}
+
+              <select onChange={e => this.getApiClubSeasonMemberList(e.target.value)}>
+                    <option value='all'>All</option>
+                    {this.state.seasons_list.map(season => (
+                        <option value={season.id}>{season.slug_name}</option>
+                    ))}
+                </select>
 
           </div>
 

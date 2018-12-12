@@ -267,6 +267,8 @@
   border-radius: 5px;
   box-shadow: 1px 1px 4px black;
   display: none;
+  /*position: relative;*/
+  /*bottom: 30px;*/
 }
 
 .show_hide_filters {
@@ -307,4 +309,5 @@
   height: 25px;
   padding: 5px;
   line-height: 0;
+  cursor: pointer;
 }
