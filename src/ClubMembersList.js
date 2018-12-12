@@ -816,6 +816,18 @@ class ClubMembersList extends Component {
   componentDidMount(){
     this.getApiClubMemberList();
     this.getApiSeasonClubList();
+
+    try {
+        const container = document.getElementById("container");
+        container.style.width = "unset";
+
+        const page = document.getElementById("page");
+        page.style.width = "100%";
+        page.style.padding = "50px";
+    }
+    catch{
+        console.log("No container/page");
+    }
   }
 
   renderEditable(cellInfo) {
