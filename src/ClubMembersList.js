@@ -74,6 +74,7 @@ class ClubMembersList extends Component {
   // Get season club member list
   getApiClubSeasonMemberList(season_id){
 
+    this.setState({members_data: []});
     let API_URL = '';
 
     if(season_id === 'all'){
