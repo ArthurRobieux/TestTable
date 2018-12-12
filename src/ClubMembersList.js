@@ -158,7 +158,7 @@ class ClubMembersList extends Component {
         id: api_response.results[i].profile.id,
         height: api_response.results[i].profile.weight,
         weight: api_response.results[i].profile.height,
-        licence_number: api_response.results[i].profile.licence_number,
+        licence_number: api_response.results[i].licence_number,
         phone_number: api_response.results[i].profile.phone_number,
         teams: api_response.results[i].teams,
         status: api_response.results[i].profile.status.slug_name,
@@ -251,6 +251,13 @@ class ClubMembersList extends Component {
                                     Cell: this.renderEditable,
                                     filterMethod: (filter, row) => this.getCheckboxTeamsFilterMethod(filter, row, 'teams'),
                                     Filter: ({ filter, onChange }) => this.getCheckboxTeamsFilter(filter, onChange, 'teams'),
+                                },
+                                {
+                                    Header: this.state.columns_name[16].localized_name,
+                                    accessor: 'licence_number',
+                                    width: 150,
+                                    filterable: false,
+                                    Cell: this.renderEditable,
                                 },
                                 {
                                     Header: this.state.columns_name[15].localized_name,
