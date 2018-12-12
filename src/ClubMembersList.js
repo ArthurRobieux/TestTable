@@ -371,7 +371,8 @@ class ClubMembersList extends Component {
           // const page_size = this.state.members_data.length;
 
           return(
-                <CheckboxTable ref={r => (this.checkboxTable = r)} data={data} noDataText="Loading .."
+                <CheckboxTable ref={r => (this.checkboxTable = r)} data={data}
+                             noDataText={this.props.translations.no_data}
                              defaultPageSize={20} showPagination={true} columns={this.state.columns}
                              className="-striped -highlight react_table" filterable {...checkboxProps}
                              defaultFilterMethod={(filter, row) => row[filter.id] !== undefined
@@ -608,7 +609,7 @@ class ClubMembersList extends Component {
                         {/*Select filter  */}
                         <div id={"select_filter"}>
                         <select onChange={event => onChange(event.target.value)} id={"select_filter"}>
-                            <option value='All'>All</option>
+                            <option value='All'>{this.props.translations.all}</option>
                             {options.map(option => (
                                 <option value={option}>{option}</option>
                             ))}
@@ -712,7 +713,7 @@ class ClubMembersList extends Component {
                         {/*Checkbox Filter*/}
                         <div id={"checkbox_filter"}>
                             <input type={"checkbox"} id='all_checkbox' onChange={event => onChange(event.target.value)}/>
-                            All
+                            {this.props.translations.all}
                             {options.map(option => (
                                 <div>
                                     <input type={"checkbox"} id={option} onChange={event => onChange(event.target.value)}/>
@@ -982,7 +983,7 @@ class ClubMembersList extends Component {
               {/*{this.showSelection()}*/}
 
               <select onChange={e => this.getApiClubSeasonMemberList(e.target.value)} className={"select_season"}>
-                    <option value='all'>All</option>
+                    <option value='all'>{this.props.translations.all}</option>
                     {this.state.seasons_list.map(season => (
                         <option value={season.id}>{season.slug_name}</option>
                     ))}

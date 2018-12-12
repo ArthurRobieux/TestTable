@@ -26,6 +26,8 @@ translations['infos'] = root.dataset.infos;
 translations['add_a_parent'] = root.dataset.add_a_parent;
 translations['update_office_presence'] = root.dataset.update_office_presence;
 translations['delete_from_club_confirmation'] = root.dataset.delete_from_club_confirmation;
+translations['no_data'] = root.dataset.no_data;
+translations['all'] = root.dataset.all;
 
 class MembersListApp extends React.Component {
 
